@@ -9,7 +9,7 @@
     
     <title>
         
-            hexo提交时 nothing to commit 问题 |
+            hexo + github 搭建博客 |
         
         KAI&#39;S NOTE
     </title>
@@ -166,7 +166,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">hexo提交时 nothing to commit 问题</span>
+            <span class="title-hover-animation">hexo + github 搭建博客</span>
         </div>
 
         
@@ -185,8 +185,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-01-01 21:25:09</span>
-        <span class="mobile">2022-01-01 21:25</span>
+        <span class="pc">2022-01-01 22:18:15</span>
+        <span class="mobile">2022-01-01 22:18</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -198,7 +198,7 @@
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/hexo/%E9%97%AE%E9%A2%98/">问题</a>&nbsp;
+                        &gt; <a href="/categories/hexo/%E6%90%AD%E5%BB%BA/">搭建</a>&nbsp;
                     </li>
                 
             </ul>
@@ -220,12 +220,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>46 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>912 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>1 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>3 分钟</span>
         </span>
     
     
@@ -241,11 +241,129 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>hexo d 后新内容无法提交，提示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">On branch master</span><br><span class="line">nothing to commit, working directory clean</span><br></pre></td></tr></table></figure>
+            <p>流程：搭建本地博客—创建远程仓库—本地远程连接—本地发布到远程</p>
+<h1 id="1-前提准备"><a href="#1-前提准备" class="headerlink" title="1.前提准备"></a>1.前提准备</h1><p>1.安装git<br>2.安装node.js<br>3.注册GitHub账号（用户名用英文）</p>
+<p>前两项都是傻瓜式安装，不停下一步<br>由于我很早就安装好并注册过了，没办法一步一步截图，所以这里不再赘述了。网上详细的教程很多，不难。</p>
+<h1 id="2-搭建本地博客"><a href="#2-搭建本地博客" class="headerlink" title="2.搭建本地博客"></a>2.搭建本地博客</h1><h3 id="2-1-创建一个文件夹"><a href="#2-1-创建一个文件夹" class="headerlink" title="2-1.创建一个文件夹"></a>2-1.创建一个文件夹</h3><p>在任意位置创建一个文件夹，博客相关所有内容将全部再次文件夹中，我本人是 <code>E:\blog\Hexo</code></p>
+<h3 id="2-2-安装Hexo"><a href="#2-2-安装Hexo" class="headerlink" title="2-2.安装Hexo"></a>2-2.安装Hexo</h3><p>1.进入上面的文件夹</p>
+<p>2.鼠标右键，点击 <code>Git Bash Here</code> 进入执行命令的窗口</p>
+<p>3.执行安装命令 <code>npm install hexo-cli -g</code></p>
+<p>4.执行初始化命令  <code>hexo init</code>， 等待执行完成后，文件夹中出现一些文件，说明安装成功，例如：</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201012236018.png"
+                      alt="image-20220101223627942" style="zoom: 80%;" 
+                >
 
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>解决方法是删除 “.deploy”<br>依次执行以下指令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rm -rf .deploy</span><br><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<p>5.执行生成命令 <code>hexo g</code>，再执行启动服务命令 <code>hexo s</code>。</p>
+<p>6.若输出 <code>Hexo is running at http://localhost:4000 </code>说明启动成功</p>
+<p>7.在浏览器中访问 <code>http://localhost:4000</code>查看博客效果，当然现在比较简陋</p>
+<p>6.进入执行命令的窗口，点击<code>Ctrl+C</code>可结束服务，继续执行其他命令</p>
+<h1 id="3-创建远程仓库"><a href="#3-创建远程仓库" class="headerlink" title="3.创建远程仓库"></a>3.创建远程仓库</h1><p>1.登录GitHub，点击图中位置，进入仓库页面</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201012249607.png"
+                      alt="image-20220101224933561" style="zoom:80%;" 
+                >
+
+<p>2.点击如图位置，新建仓库</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201012251347.png"
+                      alt="image-20220101225111278" style="zoom: 67%;" 
+                >
+
+<p>3.新建仓库是信息填写细节要求如图，填好后点击确定创建</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201012256547.png"
+                      alt="image-20220101225603475" style="zoom:80%;" 
+                >
+
+<h1 id="4-本地远程连接"><a href="#4-本地远程连接" class="headerlink" title="4.本地远程连接"></a>4.本地远程连接</h1><h3 id="4-1-绑定-SSH-KEY"><a href="#4-1-绑定-SSH-KEY" class="headerlink" title="4-1.绑定 SSH KEY"></a>4-1.绑定 SSH KEY</h3><p>1.本地生成 ssh key</p>
+<p>回到刚刚的执行命令的窗口，执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;your email@example.com&quot;</span><br></pre></td></tr></table></figure>
+
+<p>使用 GitHub 绑定的邮箱</p>
+<p>不断回车，直到输出以下内容：</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201012315316.png"
+                      alt="image-20220101231527258" style="zoom:80%;" 
+                >
+
+<p>按照该路径找到该文件，记事本打开，全选复制</p>
+<p>2.GitHub 绑定该ssh</p>
+<p>依次点击：头像—Settings—SSH and GPG keys—new ssh key</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201012322988.png"
+                      alt="image-20220101232217906" style="zoom: 50%;" 
+                >
+
+<p>执行命令窗口，执行 <code> ssh -T git@github.com</code>，回车后输入yes</p>
+<p>若输出 <code>Hi ***! You&#39;ve successfully......</code>说明绑定成功</p>
+<p>3.配置个人信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;Github用户名&quot;</span><br><span class="line">git config --global user.email &quot;Github绑定的邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-生成token"><a href="#4-2-生成token" class="headerlink" title="4-2.生成token"></a>4-2.生成token</h3><p>1.依次点击：头像—Settings—Developer settings—Personal access tokens—Generate new token</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201012332548.png"
+                      alt="image-20220101233206494" style="zoom: 67%;" 
+                >
+
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201012336416.png"
+                      alt="image-20220101233648346" style="zoom:67%;" 
+                >
+
+<p>2.生成后会有一段token序列号，一定！！！复制下来记录好，以后进入将看不到此序列，留着备用。</p>
+<h1 id="5-本地发布到远程"><a href="#5-本地发布到远程" class="headerlink" title="5.本地发布到远程"></a>5.本地发布到远程</h1><h3 id="5-1-绑定仓库路径"><a href="#5-1-绑定仓库路径" class="headerlink" title="5-1.绑定仓库路径"></a>5-1.绑定仓库路径</h3><p>1.进入自己创建的仓库，复制下来仓库路径</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201012344981.png"
+                      alt="image-20220101234445926" style="zoom:67%;" 
+                >
+
+<p>2.博客配置文件中进行配置</p>
+<p>记事本（Notepad++、Vs Code等更好）打开 <code>E:\blog\Hexo\ _config.yml（换成自己的）</code></p>
+<p>将该文件靠后位置的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: </span><br></pre></td></tr></table></figure>
+
+<p>修改为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https://github.com/xxx/xxx.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
+
+<p>注意：必须是英文冒号；冒号后面都有一个空格；repository后面是刚刚复制的仓库路径</p>
+<h3 id="5-2-本地博客发布到远程"><a href="#5-2-本地博客发布到远程" class="headerlink" title="5-2.本地博客发布到远程"></a>5-2.本地博客发布到远程</h3><p>1.安装 hexo-deployer-git 自动部署发布工具</p>
+<p>在执行命令窗口执行 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>2.发布</p>
+<p>依次执行：</p>
+<p>清除缓存 <code>hexo clean</code> ，生成 <code>hexo g</code> ，发布 <code>hexo d</code></p>
+<p>3.错误处理</p>
+<p>若出现以下错误，是网络问题，刷新多试几次就好了</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201012357224.png"
+                      alt="image-20220101235748179" style="zoom:80%;" 
+                >
+
+<p>4.没错误的话会弹出一个输入框，输入前面记录好的token序列确定后会成功发布</p>
+<h1 id="6-检查"><a href="#6-检查" class="headerlink" title="6.检查"></a>6.检查</h1><p>在浏览器访问 <code>https://用户名.github.io/</code>，可看到远程博客效果，博客已经搭建成功。</p>
+<p><em>点击标题下 hexo 标签，可查看包括博客美化等相关文章</em></p>
 
         </div>
 
@@ -253,11 +371,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：hexo提交时 nothing to commit 问题</li>
+        <li>本文标题：hexo + github 搭建博客</li>
         <li>本文作者：kai</li>
-        <li>创建时间：2022-01-01 21:25:09</li>
+        <li>创建时间：2022-01-01 22:18:15</li>
         <li>
-            本文链接：https://kaix2301.github.io/2022/01/01/hexo提交时-nothing-to-commit-问题/
+            本文链接：https://kaix2301.github.io/2022/01/01/hexo-github-搭建博客/
         </li>
         <li>
             版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -281,29 +399,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2022/01/01/hexo-github-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">hexo + github 搭建博客</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/01/01/linux-01VMware%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE/"
+                           href="/2022/01/01/hexo%E6%8F%90%E4%BA%A4%E6%97%B6-nothing-to-commit-%E9%97%AE%E9%A2%98/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">linux-01VMware网络设置</span>
+                                <span class="post-nav-title-item">hexo提交时 nothing to commit 问题</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -429,7 +532,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-text">问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-text">解决</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%89%8D%E6%8F%90%E5%87%86%E5%A4%87"><span class="nav-text">1.前提准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%90%AD%E5%BB%BA%E6%9C%AC%E5%9C%B0%E5%8D%9A%E5%AE%A2"><span class="nav-text">2.搭建本地博客</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-text">2-1.创建一个文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%AE%89%E8%A3%85Hexo"><span class="nav-text">2-2.安装Hexo</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%88%9B%E5%BB%BA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-text">3.创建远程仓库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E6%9C%AC%E5%9C%B0%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="nav-text">4.本地远程连接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E7%BB%91%E5%AE%9A-SSH-KEY"><span class="nav-text">4-1.绑定 SSH KEY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E7%94%9F%E6%88%90token"><span class="nav-text">4-2.生成token</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E6%9C%AC%E5%9C%B0%E5%8F%91%E5%B8%83%E5%88%B0%E8%BF%9C%E7%A8%8B"><span class="nav-text">5.本地发布到远程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E7%BB%91%E5%AE%9A%E4%BB%93%E5%BA%93%E8%B7%AF%E5%BE%84"><span class="nav-text">5-1.绑定仓库路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E6%9C%AC%E5%9C%B0%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E5%88%B0%E8%BF%9C%E7%A8%8B"><span class="nav-text">5-2.本地博客发布到远程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E6%A3%80%E6%9F%A5"><span class="nav-text">6.检查</span></a></li></ol>
     </div>
 </div>
         </aside>
