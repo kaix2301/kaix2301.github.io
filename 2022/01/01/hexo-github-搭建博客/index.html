@@ -220,12 +220,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>912 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>998 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>3 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>4 分钟</span>
         </span>
     
     
@@ -353,13 +353,8 @@
 <p>依次执行：</p>
 <p>清除缓存 <code>hexo clean</code> ，生成 <code>hexo g</code> ，发布 <code>hexo d</code></p>
 <p>3.错误处理</p>
-<p>若出现以下错误，是网络问题，刷新多试几次就好了</p>
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201012357224.png"
-                      alt="image-20220101235748179" style="zoom:80%;" 
-                >
+<p>若出现以下错误，有两种可能，<a class="link"   target="_blank" rel="noopener" href="https://kaix2301.github.io/2022/01/02/hexo%E6%8F%90%E4%BA%A4%E6%97%B6-Error-Spawn-failed-%E9%97%AE%E9%A2%98/" >点此<i class="fas fa-external-link-alt"></i></a>查看解决方法，很简单。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fatal: unable to access &#x27;https://github.com/*/*.github.io.git/&#x27;: Failed to connect to github.com port 443: Timed out</span><br><span class="line">FATAL &#123;</span><br><span class="line">  err: Error: Spawn failed</span><br><span class="line">      at ChildProcess.&lt;anonymous&gt; (E:\blog\Hexo\node_modules\hexo-util\lib\spawn.js:51:21)</span><br><span class="line">      at ChildProcess.emit (events.js:315:20)</span><br><span class="line">      at ChildProcess.cp.emit (E:\blog\Hexo\node_modules\cross-spawn\lib\enoent.js:34:29)</span><br><span class="line">      at Process.ChildProcess._handle.onexit (internal/child_process.js:276:12) &#123;</span><br><span class="line">    code: 128</span><br><span class="line">  &#125;</span><br><span class="line">&#125; Something&#x27;s wrong. </span><br></pre></td></tr></table></figure>
 
 <p>4.没错误的话会弹出一个输入框，输入前面记录好的token序列确定后会成功发布</p>
 <h1 id="6-检查"><a href="#6-检查" class="headerlink" title="6.检查"></a>6.检查</h1><p>在浏览器访问 <code>https://用户名.github.io/</code>，可看到远程博客效果，博客已经搭建成功。</p>
@@ -398,6 +393,21 @@
 
         
             <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/01/02/hexo%E6%8F%90%E4%BA%A4%E6%97%B6-Error-Spawn-failed-%E9%97%AE%E9%A2%98/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">hexo提交时 Error:Spawn failed 问题</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
                 
                 
                     <div class="article-next">
