@@ -220,12 +220,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>64 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>634 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>1 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>2 分钟</span>
         </span>
     
     
@@ -241,7 +241,7 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h1><p><img  
+            <h1 id="OSI模型"><a href="#OSI模型" class="headerlink" title="OSI模型"></a>OSI模型</h1><p><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201031805539.png"
@@ -263,6 +263,71 @@
                      data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201031814014.png"
                       alt="image-20220103181410962" style="zoom:80%;" 
                 >
+
+<h1 id="各层介绍"><a href="#各层介绍" class="headerlink" title="各层介绍"></a>各层介绍</h1><h4 id="1-应用层"><a href="#1-应用层" class="headerlink" title="1.应用层"></a>1.应用层</h4><p>能和用户<strong>交互</strong>且能产生网络流量（可以<strong>联网</strong>）的程序。</p>
+<p>常用服务以及协议：</p>
+<ul>
+<li>文件传输—FTP</li>
+<li>电子邮件—SMTP</li>
+<li>万维网—HTTP</li>
+</ul>
+<h4 id="2-表示层"><a href="#2-表示层" class="headerlink" title="2.表示层"></a>2.表示层</h4><p>用于处理在<strong>两个</strong>通信系统中<strong>交换信息</strong>的表示方式（语法和语义)</p>
+<p>主要功能：</p>
+<ul>
+<li>数据格式变换（翻译为看得懂的形式）</li>
+<li>数据加密和解密</li>
+<li>数据压缩和恢复</li>
+</ul>
+<h4 id="3-会话层"><a href="#3-会话层" class="headerlink" title="3.会话层"></a>3.会话层</h4><p>会话 / 建立同步(SYN)：<br>向表示层<strong>实体/用户进程</strong>提供<strong>建立连接</strong>并在连接上<strong>有序地传输</strong>数据。</p>
+<p>主要功能：</p>
+<ul>
+<li>建立、管理、终止会话</li>
+<li>校验点，会话再通信失效时从校验点恢复通信</li>
+</ul>
+<h4 id="4-传输层"><a href="#4-传输层" class="headerlink" title="4.传输层"></a>4.传输层</h4><p>负责主机中<strong>两个进程</strong>的通信，即<strong>端到端</strong>的通信。</p>
+<p>传输单位：报文段或用户数据报。</p>
+<p>主要功能：</p>
+<ul>
+<li>可靠传输（收到确认信息再发）</li>
+<li>不可靠传输（无确认机制）</li>
+<li>差错控制</li>
+<li>流量控制（发送接收速度控制）</li>
+<li>复用分用（把一段数据拆开分别交给正确的进程）</li>
+</ul>
+<p>主要协议：TCP，UDP</p>
+<h4 id="5-网络层"><a href="#5-网络层" class="headerlink" title="5.网络层"></a>5.网络层</h4><p>把分组从源端传到目的端，提供通信服务。</p>
+<p>传输单位：数据报。(数据报长时，切割为分组)</p>
+<p>主要功能：</p>
+<ul>
+<li>路由选择</li>
+<li>流量控制</li>
+<li>差错控制</li>
+<li>拥塞控制</li>
+</ul>
+<p>拥塞控制是针对全体结点，流量控制正对发送端接收端。</p>
+<p>主要协议：IP、IPX、ICMP、IGMP、ARP、RARP、OSPF</p>
+<h4 id="6-数据链路层"><a href="#6-数据链路层" class="headerlink" title="6.数据链路层"></a>6.数据链路层</h4><p>是把网络层传下来的数据报组装成帧。</p>
+<p>传输单位：帧。</p>
+<p>主要功能：</p>
+<ul>
+<li>成帧—定义帧的开始和结束</li>
+<li>差错控制—帧错+位错</li>
+<li>流量控制</li>
+<li>访问（接入）控制—控制对信道的访问，比如广播式信道需独占</li>
+</ul>
+<p>主要协议：SDLC、HDLC、PPP、STP</p>
+<h4 id="7-物理层"><a href="#7-物理层" class="headerlink" title="7.物理层"></a>7.物理层</h4><p>在物理媒体上实现比特流的透明传输。</p>
+<p>传输单位是比特。</p>
+<p>透明传输：无论数据是何比特组合,都应能在链路上传送。</p>
+<p>主要功能：</p>
+<ul>
+<li>定义接口特性—引脚等</li>
+<li>定义传输模式—单工、半双工、双工</li>
+<li>定义传输速率</li>
+<li>比特同步</li>
+<li>比特编码—差分曼切斯特编码等</li>
+</ul>
+<p>主要协议：Rj45、802.3</p>
 
         </div>
 
@@ -297,6 +362,21 @@
 
         
             <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/01/04/hexo-github%E5%BC%BA%E5%88%B6%E4%BD%BF%E7%94%A8https/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">hexo+github强制使用https</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
                 
                 
                     <div class="article-next">
@@ -431,7 +511,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OSI%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B"><span class="nav-text">OSI七层模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B"><span class="nav-text">通信过程</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OSI%E6%A8%A1%E5%9E%8B"><span class="nav-text">OSI模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B"><span class="nav-text">通信过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%84%E5%B1%82%E4%BB%8B%E7%BB%8D"><span class="nav-text">各层介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%BA%94%E7%94%A8%E5%B1%82"><span class="nav-text">1.应用层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%A1%A8%E7%A4%BA%E5%B1%82"><span class="nav-text">2.表示层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E4%BC%9A%E8%AF%9D%E5%B1%82"><span class="nav-text">3.会话层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="nav-text">4.传输层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="nav-text">5.网络层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="nav-text">6.数据链路层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%E7%89%A9%E7%90%86%E5%B1%82"><span class="nav-text">7.物理层</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
 </div>
         </aside>
