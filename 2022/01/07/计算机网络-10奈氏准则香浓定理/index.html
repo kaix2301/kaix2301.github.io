@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="IT,计算机,computer,编程,program">
+    <meta name="description" content="IT,计算机,computer,编程,program">
+    <meta name="author" content="kai">
+    
+    <title>
+        
+            计算机网络-10奈氏准则香浓定理 |
+        
+        KAI&#39;S NOTE
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201011754721.jfif">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"kainote.top","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201011748253.jpg","favicon":"https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201011754721.jfif","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"“长风破浪会有时”"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                KAI&#39;S NOTE
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">计算机网络-10奈氏准则香浓定理</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201011748253.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">kai</span>
+                        
+                            <span class="author-label">(¬‿¬)</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-01-07 09:55:05</span>
+        <span class="mobile">2022-01-07 09:55</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%89%A9%E7%90%86%E5%B1%82/">物理层</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>833 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>2 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="1-失真"><a href="#1-失真" class="headerlink" title="1.失真"></a>1.失真</h1><h3 id="1-1含义"><a href="#1-1含义" class="headerlink" title="1-1含义"></a>1-1含义</h3><p>发送时信号清晰有规律，由于现实中信道上有<strong>噪声、干扰和带宽限制</strong>等，接收时信号已经变得没那么清晰</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201071007458.png"
+                      alt="image-20220107100728399" style="zoom:80%;" 
+                >
+
+<h3 id="1-2影响因素"><a href="#1-2影响因素" class="headerlink" title="1-2影响因素"></a>1-2影响因素</h3><p>与失真程度关系：</p>
+<ul>
+<li>码元传输速率（正相关）</li>
+<li>信号传输距离（正相关）</li>
+<li>噪声干扰（正相关）</li>
+<li>传输媒体质量（负相关）</li>
+</ul>
+<h3 id="1-3码间串扰"><a href="#1-3码间串扰" class="headerlink" title="1-3码间串扰"></a>1-3码间串扰</h3><p>接收端收到的信号波形失去了码元之间清晰界限的现象。一般出现在传输频率过高时。</p>
+<h1 id="2-奈氏准则"><a href="#2-奈氏准则" class="headerlink" title="2.奈氏准则"></a>2.奈氏准则</h1><h3 id="2-1含义"><a href="#2-1含义" class="headerlink" title="2-1含义"></a>2-1含义</h3><p>在理想低通（<strong>无噪声，带宽受限）</strong>条件下，为了避免码间串扰，极限<strong>码元</strong>传输速率为2W Baud，W是信道带宽，<strong>单位是Hz</strong>。</p>
+<h3 id="2-2解释"><a href="#2-2解释" class="headerlink" title="2-2解释"></a>2-2解释</h3><ul>
+<li>在信道中，码元传输速率是有上限。若传输速率超过上限，就会出现严重的码间串扰，使接收端不可能对码元进行完全正确的识别。</li>
+<li>信道的频带越宽（即能通过的信号<strong>高频分量</strong>越多)，就可以用更高速率进行码元的有效传输。</li>
+<li>奈氏准则给出<strong>码元</strong>传输速率限制,没有对<strong>信息</strong>传输速率给出限制。</li>
+<li>码元的传输速率受奈氏准则的制约，所以要提高数据的传输速率，就必须使每个码元能携带<strong>更多比特</strong>信息量,这就需要采用多元制的调制方法。</li>
+</ul>
+<h3 id="2-3极限数据传输率（理想低通信道）"><a href="#2-3极限数据传输率（理想低通信道）" class="headerlink" title="2-3极限数据传输率（理想低通信道）"></a>2-3极限数据传输率（理想低通信道）</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201071123981.png"
+                      alt="image-20220107112301913"
+                ></p>
+<p>例：<br>某通信链路的带宽为2kHz，采用2个相位，每个相位具有2种振幅的调制技术，求该通信链路的最大数据传输率是。</p>
+<p>解：<br>2相位 * 每相位2振幅 = 4种变化<br>则每码元携带2bit数据<br>W = 2000 Hz<br>传输率 = 2 * 2000 * 2 = 8000 b/s = 8 kb/s</p>
+<h1 id="3-香农定理"><a href="#3-香农定理" class="headerlink" title="3.香农定理"></a>3.香农定理</h1><h3 id="3-1信噪比"><a href="#3-1信噪比" class="headerlink" title="3-1信噪比"></a>3-1信噪比</h3><p>噪声存在于所有的电子设备和通信信道。噪声随机产生，它的瞬时值有时会很大，因此<strong>噪声会使接收端对码元的判决产生错误</strong>。但是<strong>噪声的影响是相对的</strong>，若信号较强，那么噪声影响相对较小。因此，信噪比就很重要。</p>
+<p>信噪比=信号平均功率/噪声平均功率，常记为S/N，并用分贝dB作为度量单位。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201071123157.png"
+                      alt="image-20220107112344125"
+                ></p>
+<h3 id="3-2含义"><a href="#3-2含义" class="headerlink" title="3-2含义"></a>3-2含义</h3><p>在<strong>带宽受限且有噪声</strong>的信道中，为了不产生误差，信息的<strong>数据</strong>传输速率有上限值。</p>
+<h3 id="3-3极限数据传输率（带宽限且有噪声）"><a href="#3-3极限数据传输率（带宽限且有噪声）" class="headerlink" title="3-3极限数据传输率（带宽限且有噪声）"></a>3-3极限数据传输率（带宽限且有噪声）</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201071124882.png"
+                      alt="image-20220107112424827"
+                ></p>
+<p>若题目所给信噪比单位为dB，通过3-1中公式换算为S/N</p>
+<h3 id="3-4解释"><a href="#3-4解释" class="headerlink" title="3-4解释"></a>3-4解释</h3><ul>
+<li>带宽和信噪比与极限数据传输率正相关</li>
+<li>带宽和信噪比确定，信息传输速率就确定了</li>
+<li>信息传输速率低于极限速率，必有某方法可实现无差错传输</li>
+<li>实际速率低于极限速率</li>
+</ul>
+<h1 id="4-奈氏和香农对比"><a href="#4-奈氏和香农对比" class="headerlink" title="4.奈氏和香农对比"></a>4.奈氏和香农对比</h1><table>
+<thead>
+<tr>
+<th></th>
+<th>香农</th>
+<th>奈氏</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>信道</strong></td>
+<td>带宽受限，有噪声</td>
+<td>带宽受限，无噪声</td>
+</tr>
+<tr>
+<td><strong>关注</strong></td>
+<td>噪声影响问题（外）</td>
+<td>码间串扰问题（内）</td>
+</tr>
+<tr>
+<td><strong>方案</strong></td>
+<td>提高带宽，提高信噪比</td>
+<td>提高带宽，换编码方式（携带更多bit）</td>
+</tr>
+</tbody></table>
+<p>所得两个极限速率，取其中更小的一个</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：计算机网络-10奈氏准则香浓定理</li>
+        <li>本文作者：kai</li>
+        <li>创建时间：2022-01-07 09:55:05</li>
+        <li>
+            本文链接：https://kainote.top/2022/01/07/计算机网络-10奈氏准则香浓定理/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">#计算机网络</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/01/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-11%E5%9F%BA%E5%B8%A6%E5%92%8C%E5%AE%BD%E5%B8%A6%E4%BF%A1%E5%8F%B7/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">计算机网络-11基带和宽带信号</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/01/06/hexo%E7%82%B9%E5%87%BB%E6%95%88%E6%9E%9C-%E5%BD%A9%E8%89%B2%E7%88%B1%E5%BF%83%E6%88%96%E6%A0%B8%E5%BF%83%E4%BB%B7%E5%80%BC%E8%A7%82/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">hexo点击效果-彩色爱心或核心价值观</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">kai</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+				|
+				
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+		<!-- 注释 
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+		-->
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%A4%B1%E7%9C%9F"><span class="nav-text">1.失真</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1%E5%90%AB%E4%B9%89"><span class="nav-text">1-1含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2%E5%BD%B1%E5%93%8D%E5%9B%A0%E7%B4%A0"><span class="nav-text">1-2影响因素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3%E7%A0%81%E9%97%B4%E4%B8%B2%E6%89%B0"><span class="nav-text">1-3码间串扰</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%A5%88%E6%B0%8F%E5%87%86%E5%88%99"><span class="nav-text">2.奈氏准则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1%E5%90%AB%E4%B9%89"><span class="nav-text">2-1含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2%E8%A7%A3%E9%87%8A"><span class="nav-text">2-2解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3%E6%9E%81%E9%99%90%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%8E%87%EF%BC%88%E7%90%86%E6%83%B3%E4%BD%8E%E9%80%9A%E4%BF%A1%E9%81%93%EF%BC%89"><span class="nav-text">2-3极限数据传输率（理想低通信道）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E9%A6%99%E5%86%9C%E5%AE%9A%E7%90%86"><span class="nav-text">3.香农定理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1%E4%BF%A1%E5%99%AA%E6%AF%94"><span class="nav-text">3-1信噪比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2%E5%90%AB%E4%B9%89"><span class="nav-text">3-2含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3%E6%9E%81%E9%99%90%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%8E%87%EF%BC%88%E5%B8%A6%E5%AE%BD%E9%99%90%E4%B8%94%E6%9C%89%E5%99%AA%E5%A3%B0%EF%BC%89"><span class="nav-text">3-3极限数据传输率（带宽限且有噪声）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4%E8%A7%A3%E9%87%8A"><span class="nav-text">3-4解释</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%A5%88%E6%B0%8F%E5%92%8C%E9%A6%99%E5%86%9C%E5%AF%B9%E6%AF%94"><span class="nav-text">4.奈氏和香农对比</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type = "text/javascript" src="/js/click.js"></script>
+</body>
+</html>
