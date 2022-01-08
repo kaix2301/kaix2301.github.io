@@ -1261,6 +1261,8 @@ pre .javascript .function {
 }
 .page-container .page-main-content .page-main-content-bottom {
   width: 100%;
+  background: linear-gradient(to top, #fff, rgba(255,255,255,0));
+  padding-top: 15px;
 }
 .page-container .page-aside {
   position: fixed;
@@ -1607,7 +1609,7 @@ pre .javascript .function {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255,255,255,0.95);
+  background: linear-gradient(to bottom, #fff, rgba(255,255,255,0.4));
   padding-top: 2px;
   box-shadow: 2px 2px 5px var(--shadow-color);
 }
@@ -1702,6 +1704,7 @@ pre .javascript .function {
   position: relative;
   margin-left: 30px;
   font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
   color: var(--default-text-color);
 }
@@ -2082,6 +2085,7 @@ pre .javascript .function {
   background: var(--background-color);
   margin-bottom: 30px;
   box-shadow: 2px 2px 5px var(--shadow-color);
+  background: rgba(255,255,255,0.9);
 }
 @media (max-width: 780px) {
   .page-template-container {
@@ -2222,6 +2226,7 @@ pre .javascript .function {
   box-sizing: border-box;
   background: var(--background-color);
   box-shadow: 2px 2px 5px var(--shadow-color);
+  background: rgba(255,255,255,0.9);
 }
 .category-list-container:hover {
   box-shadow: 2px 2px 8px var(--shadow-hover-color);
@@ -2761,7 +2766,6 @@ pre .javascript .function {
   background: var(--background-color);
   margin-bottom: 30px;
   box-shadow: 2px 2px 5px var(--shadow-color);
-  background: rgba(255,255,255,0.9);
 }
 @media (max-width: 780px) {
   .category-container {
@@ -2869,6 +2873,7 @@ pre .javascript .function {
   box-sizing: border-box;
   background: var(--background-color);
   box-shadow: 2px 2px 5px var(--shadow-color);
+  background: rgba(255,255,255,0.9);
 }
 .tagcloud-container:hover {
   box-shadow: 2px 2px 8px var(--shadow-hover-color);
