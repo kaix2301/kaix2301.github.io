@@ -45,6 +45,7 @@
 }(window, document);
 
 /* 社会主义核心价值观效果 */
+/*
 var a_idx = 0;
 jQuery(document).ready(function ($) {
   $("body").click(function (e) {
@@ -70,3 +71,4 @@ jQuery(document).ready(function ($) {
     });
   });
 });
+*/

@@ -1,14 +1,25 @@
+/*var(--background-color)*/
 .page-container {
   position: relative;
   box-sizing: border-box;
   width: 100%;
   height: auto;
-  background: var(--background-color);
+  background: url("https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201081000420.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: auto 100%;
 keep-tablet()
+/*url("https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201072225073.png")*/
+/*var(--background-color)*/
 }
 .page-container .page-main-content {
   padding-top: $header-height;
   position: relative;
+  background: url("https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201072225073.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: auto 100%;
 keep-tablet()
 keep-mobile()
 }
@@ -56,6 +67,8 @@ keep-mobile()
 }
 .page-container .page-main-content .page-main-content-bottom {
   width: 100%;
+  background: linear-gradient(to top, #fff, rgba(255,255,255,0));
+  padding-top: 15px;
 }
 .page-container .page-aside {
   position: fixed;
@@ -68,7 +81,8 @@ keep-mobile()
   overflow-y: auto;
   padding: 20px;
   box-sizing: border-box;
-  background: var(--background-color);
+  background: #fff8f2;
+  font-weight: bold;
 keep-tablet()
 }
 .page-container .post-tools {
