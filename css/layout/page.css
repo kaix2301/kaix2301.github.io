@@ -1,10 +1,11 @@
 /*var(--background-color)*/
+/*https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201082008635.jpg*/
 .page-container {
   position: relative;
   box-sizing: border-box;
   width: 100%;
   height: auto;
-  background: url("https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201082008635.jpg");
+  background: url("/images/bg1.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
@@ -16,7 +17,7 @@ keep-tablet()
 .page-container .page-main-content {
   padding-top: $header-height;
   position: relative;
-  background: url("https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201072225073.png");
+  background: url("/images/bg2.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: auto 100%;
