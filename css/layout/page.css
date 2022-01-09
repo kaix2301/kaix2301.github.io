@@ -1,23 +1,25 @@
 /*var(--background-color)*/
 /*https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201082008635.jpg*/
+/*"images/bg1.jpg"*/
 .page-container {
   position: relative;
   box-sizing: border-box;
   width: 100%;
   height: auto;
-  background: url("/images/bg1.jpg");
+  background: url("https://s2.loli.net/2022/01/09/z15i3AgMsyqCbUK.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
   background-size: auto 100%;
 keep-tablet()
 /*url("https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201072225073.png")*/
+/*"images/bg2.png"*/
 /*var(--background-color)*/
 }
 .page-container .page-main-content {
   padding-top: $header-height;
   position: relative;
-  background: url("/images/bg2.png");
+  background: url("https://s2.loli.net/2022/01/09/yA3IpLWchsiDS94.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: auto 100%;
