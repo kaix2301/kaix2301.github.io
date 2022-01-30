@@ -9,7 +9,7 @@
 	
     <title>
         
-            IDEA2018.3.6激活到2100年 |
+            SpringBoot2.X常用注解 |
         
         KAI&#39;S NOTE
     </title>
@@ -185,7 +185,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">IDEA2018.3.6激活到2100年</span>
+            <span class="title-hover-animation">SpringBoot2.X常用注解</span>
         </div>
 
         
@@ -204,8 +204,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-01-29 17:30:28</span>
-        <span class="mobile">2022-01-29 17:30</span>
+        <span class="pc">2022-01-30 10:19:40</span>
+        <span class="mobile">2022-01-30 10:19</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -213,11 +213,11 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>&nbsp;
+                        <a href="/categories/Java/">Java</a>&nbsp;
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/%E5%B7%A5%E5%85%B7/%E6%BF%80%E6%B4%BB/">激活</a>&nbsp;
+                        &gt; <a href="/categories/Java/SpringBoot/">SpringBoot</a>&nbsp;
                     </li>
                 
             </ul>
@@ -229,7 +229,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/IDEA/">IDEA</a>&nbsp;
+                        <a href="/tags/SpringBoot/">SpringBoot</a>&nbsp;
                     </li>
                 
             </ul>
@@ -239,7 +239,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>272 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>228 字</span>
         </span>
     
     
@@ -260,48 +260,22 @@
         
 
         <div class="article-content markdown-body">
-            <h4 id=""><a href="#" class="headerlink" title=""></a></h4><h4 id="-1"><a href="#-1" class="headerlink" title=""></a></h4><blockquote>
-<p>本文仅限于学习交流，请支持正版。</p>
-</blockquote>
-<h1 id="1-下载安装包"><a href="#1-下载安装包" class="headerlink" title="1.下载安装包"></a>1.下载安装包</h1><p>官网：<a class="link"   target="_blank" rel="noopener" href="https://www.jetbrains.com/idea/download/other.html#soujer.com" >https://www.jetbrains.com/idea/download/other.html<i class="fas fa-external-link-alt"></i></a></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201291736603.png"
-                      alt="image-20220129173652812"
-                ></p>
-<p>下载好直接傻瓜式安装，不停下一步就好，需要选择的就是“安装路径”和“64位”。（记下安装路径，后面用）</p>
-<h1 id="2-下载激活jar包"><a href="#2-下载激活jar包" class="headerlink" title="2.下载激活jar包"></a>2.下载激活jar包</h1><p>链接： <a class="link"   target="_blank" rel="noopener" href="https://pan.baidu.com/s/1YhwaNrCssQKWfAIydiJRbg" >https://pan.baidu.com/s/1YhwaNrCssQKWfAIydiJRbg<i class="fas fa-external-link-alt"></i></a><br>提取码：xrz1</p>
-<h1 id="3-激活IDEA"><a href="#3-激活IDEA" class="headerlink" title="3.激活IDEA"></a>3.激活IDEA</h1><h5 id="3-1-复制jar包"><a href="#3-1-复制jar包" class="headerlink" title="3-1.复制jar包"></a>3-1.复制jar包</h5><p>将上一步下载的jar包，复制到idea安装路径的bin目录下。</p>
-<h5 id="3-2-修改文件"><a href="#3-2-修改文件" class="headerlink" title="3-2.修改文件"></a>3-2.修改文件</h5><p>bin目录下<code>idea.exe.vmoptions</code>和<code>idea64.exe.vmoptions</code>两个文件。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201291750394.png"
-                      alt="image-20220129175018326"
-                ></p>
-<p>在两个文件结尾处，都加以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2018.3.6\bin\JetbrainsIdesCrack-4.2-release-sha1-3323d5d0b82e716609808090d3dc7cb3198b8c4b.jar</span><br></pre></td></tr></table></figure>
+            <h6 id=""><a href="#" class="headerlink" title=""></a></h6><h4 id="SpringBootApplication"><a href="#SpringBootApplication" class="headerlink" title="@SpringBootApplication"></a>@SpringBootApplication</h4><p>⽤于标记是SringBoot应⽤，⾥⾯包含多个⼦注解。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span> = <span class="meta">@Configuration</span> + <span class="meta">@EnableAutoConfiguration</span> + <span class="meta">@ComponentScan</span></span><br></pre></td></tr></table></figure>
 
-<p>上面代码：<code>-javaagent:</code> + 刚刚的jar包的绝对路径</p>
-<h5 id="3-3-输入激活码。"><a href="#3-3-输入激活码。" class="headerlink" title="3-3.输入激活码。"></a>3-3.输入激活码。</h5><p>打开IDEA后出现激活窗口，若没出现，点击“Help→Register”可以打开。</p>
-<p>点击窗口上<code>Activation code</code>，然后在下面输入激活码即可。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201291759494.png"
-                      alt="image-20220129175922428"
-                ></p>
-<p>激活码（代码块右上角一键复制）：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eyJsaWNlbnNlSWQiOiIyOUxSTk9FMVlLIiwibGljZW5zZWVOYW1lIjoi08C+w7ykPz9pZGVhLmZ4dy5sYSIsImFzc2lnbmVlTmFtZSI6IiIsImFzc2lnbmVlRW1haWwiOiIiLCJsaWNlbnNlUmVzdHJpY3Rpb24iOiIiLCJjaGVja0NvbmN1cnJlbnRVc2UiOmZhbHNlLCJwcm9kdWN0cyI6W3siY29kZSI6IklJIiwicGFpZFVwVG8iOiIyMDIwLTA2LTE0In0seyJjb2RlIjoiQUMiLCJwYWlkVXBUbyI6IjIwMjAtMDYtMTQifSx7ImNvZGUiOiJEUE4iLCJwYWlkVXBUbyI6IjIwMjAtMDYtMTQifSx7ImNvZGUiOiJSU0MiLCJwYWlkVXBUbyI6IjIwMjAtMDYtMTQifSx7ImNvZGUiOiJQUyIsInBhaWRVcFRvIjoiMjAyMC0wNi0xNCJ9LHsiY29kZSI6IlJTRiIsInBhaWRVcFRvIjoiMjAyMC0wNi0xNCJ9LHsiY29kZSI6IkdPIiwicGFpZFVwVG8iOiIyMDIwLTA2LTE0In0seyJjb2RlIjoiRE0iLCJwYWlkVXBUbyI6IjIwMjAtMDYtMTQifSx7ImNvZGUiOiJDTCIsInBhaWRVcFRvIjoiMjAyMC0wNi0xNCJ9LHsiY29kZSI6IlJTMCIsInBhaWRVcFRvIjoiMjAyMC0wNi0xNCJ9LHsiY29kZSI6IlJDIiwicGFpZFVwVG8iOiIyMDIwLTA2LTE0In0seyJjb2RlIjoiUkQiLCJwYWlkVXBUbyI6IjIwMjAtMDYtMTQifSx7ImNvZGUiOiJQQyIsInBhaWRVcFRvIjoiMjAyMC0wNi0xNCJ9LHsiY29kZSI6IlJTViIsInBhaWRVcFRvIjoiMjAyMC0wNi0xNCJ9LHsiY29kZSI6IlJTVSIsInBhaWRVcFRvIjoiMjAyMC0wNi0xNCJ9LHsiY29kZSI6IlJNIiwicGFpZFVwVG8iOiIyMDIwLTA2LTE0In0seyJjb2RlIjoiV1MiLCJwYWlkVXBUbyI6IjIwMjAtMDYtMTQifSx7ImNvZGUiOiJEQiIsInBhaWRVcFRvIjoiMjAyMC0wNi0xNCJ9LHsiY29kZSI6IkRDIiwicGFpZFVwVG8iOiIyMDIwLTA2LTE0In0seyJjb2RlIjoiUERCIiwicGFpZFVwVG8iOiIyMDIwLTA2LTE0In0seyJjb2RlIjoiUFdTIiwicGFpZFVwVG8iOiIyMDIwLTA2LTE0In0seyJjb2RlIjoiUEdPIiwicGFpZFVwVG8iOiIyMDIwLTA2LTE0In0seyJjb2RlIjoiUFBTIiwicGFpZFVwVG8iOiIyMDIwLTA2LTE0In0seyJjb2RlIjoiUFBDIiwicGFpZFVwVG8iOiIyMDIwLTA2LTE0In0seyJjb2RlIjoiUFJCIiwicGFpZFVwVG8iOiIyMDIwLTA2LTE0In0seyJjb2RlIjoiUFNXIiwicGFpZFVwVG8iOiIyMDIwLTA2LTE0In0seyJjb2RlIjoiRFAiLCJwYWlkVXBUbyI6IjIwMjAtMDYtMTQifSx7ImNvZGUiOiJSUyIsInBhaWRVcFRvIjoiMjAyMC0wNi0xNCJ9LHsiY29kZSI6IkRQQSIsInBhaWRVcFRvIjoiMjAyMC0wNi0xNCJ9XSwiaGFzaCI6IjE4MDUwOTkxLzA6LTE0Mzk5NjcyODAiLCJncmFjZVBlcmlvZERheXMiOjcsImF1dG9Qcm9sb25nYXRlZCI6ZmFsc2UsImlzQXV0b1Byb2xvbmdhdGVkIjpmYWxzZX0=</span><br></pre></td></tr></table></figure>
+<ul>
+<li>@Configuration: 一般标注在某个类上，用于spring扫描注入,⼀般结合<code>@Bean</code>使</li>
+<li>@EnableAutoConfiguration: 启用Spring的自动加载配置,自动载⼊应用程序所需的所有Bean</li>
+<li>@ComponentScan：告诉spring扫描包的范围，默认是Applocation类所在的全部⼦包，可以指定 其他包 @ComponentScan({“net.xdclass.package1”,”net.xdclass.package2”})</li>
+</ul>
+<h4 id="Controller"><a href="#Controller" class="headerlink" title="@Controller"></a>@Controller</h4><p>⽤于标记这个类是控制器，返回页面时使用。</p>
+<h4 id="ResponseBody"><a href="#ResponseBody" class="headerlink" title="@ResponseBody"></a>@ResponseBody</h4><p>控制器注释使用<code>@Controller</code>时，如果要返回JSON,则需要在接口上使用<code>@ResponseBody</code>才可以。</p>
+<h4 id="RestController"><a href="#RestController" class="headerlink" title="@RestController"></a>@RestController</h4><p>标记这个类是⼀个控制器（同<code>@Controller</code>）。</p>
+<p>接⼝返回数据会序列化为JSON（同<code>@ResponseBody</code>）。</p>
+<h4 id="RequestMapping"><a href="#RequestMapping" class="headerlink" title="@RequestMapping"></a>@RequestMapping</h4><p>路由映射，用于类上做1级路径；用于某个接口上做子路径。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;api/v1/pri/absence_apply&quot;)</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="4-检查结果"><a href="#4-检查结果" class="headerlink" title="4.检查结果"></a>4.检查结果</h1><p>打开IDEA时，过渡页面下方显示2100，说明激活成功。</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201291805876.png"
-                      alt="image-20220129180536817"
-                ></p>
+<h4 id="GetMapping，-PostMapping"><a href="#GetMapping，-PostMapping" class="headerlink" title="@GetMapping，@PostMapping"></a>@GetMapping，@PostMapping</h4><p>用于接口上做子路径，功能在<code>@RequestMapping</code>上增加了post和get的限制。</p>
 
         </div>
 
@@ -309,11 +283,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：IDEA2018.3.6激活到2100年</li>
+        <li>本文标题：SpringBoot2.X常用注解</li>
         <li>本文作者：kai</li>
-        <li>创建时间：2022-01-29 17:30:28</li>
+        <li>创建时间：2022-01-30 10:19:40</li>
         <li>
-            本文链接：https://kainote.top/2022/01/29/IDEA2018-3-6激活到2100年/
+            本文链接：https://kainote.top/2022/01/30/SpringBoot2-X常用注解/
         </li>
         <li>
             版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -328,7 +302,7 @@
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
-                        <a href="/tags/IDEA/">#IDEA</a>&nbsp;
+                        <a href="/tags/SpringBoot/">#SpringBoot</a>&nbsp;
                     </li>
                 
             </ul>
@@ -340,13 +314,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2022/01/30/SpringBoot2-X%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/"
+                           href="/2022/01/30/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">SpringBoot2.X常用注解</span>
+                                <span class="post-nav-title-item">静态资源访问</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -356,10 +330,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/01/19/markdown%E5%85%AC%E5%BC%8F%E6%80%BB%E7%BB%93/"
+                           href="/2022/01/29/IDEA2018-3-6%E6%BF%80%E6%B4%BB%E5%88%B02100%E5%B9%B4/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">markdown公式总结</span>
+                                <span class="post-nav-title-item">IDEA2018.3.6激活到2100年</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -570,7 +544,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-text"></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#-1"><span class="nav-text"></span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-text">1.下载安装包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E4%B8%8B%E8%BD%BD%E6%BF%80%E6%B4%BBjar%E5%8C%85"><span class="nav-text">2.下载激活jar包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%BF%80%E6%B4%BBIDEA"><span class="nav-text">3.激活IDEA</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-%E5%A4%8D%E5%88%B6jar%E5%8C%85"><span class="nav-text">3-1.复制jar包</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6"><span class="nav-text">3-2.修改文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-%E8%BE%93%E5%85%A5%E6%BF%80%E6%B4%BB%E7%A0%81%E3%80%82"><span class="nav-text">3-3.输入激活码。</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E6%A3%80%E6%9F%A5%E7%BB%93%E6%9E%9C"><span class="nav-text">4.检查结果</span></a>
+        <ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link"><span class="nav-text"></span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SpringBootApplication"><span class="nav-text">@SpringBootApplication</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Controller"><span class="nav-text">@Controller</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ResponseBody"><span class="nav-text">@ResponseBody</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RestController"><span class="nav-text">@RestController</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RequestMapping"><span class="nav-text">@RequestMapping</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GetMapping%EF%BC%8C-PostMapping"><span class="nav-text">@GetMapping，@PostMapping</span></a>
     </div>
 </div>
         </aside>
