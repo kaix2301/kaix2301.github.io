@@ -238,9 +238,13 @@
 
     
     
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.3k 字</span>
+        </span>
+    
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>1 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>7 分钟</span>
         </span>
     
     
@@ -256,7 +260,172 @@
         
 
         <div class="article-content markdown-body">
-            
+            <h6 id=""><a href="#" class="headerlink" title=""></a></h6><h1 id="1-电路交换"><a href="#1-电路交换" class="headerlink" title="1.电路交换"></a>1.电路交换</h1><h5 id="1-1-原理"><a href="#1-1-原理" class="headerlink" title="1-1.原理"></a>1-1.原理</h5><p>在数据传输期间，源结点与目的结点之间有一条由中间结点构成的<strong>专用</strong>物理连接线路，在数据传输结束之前，这条线路一直保持。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201301635471.png"
+                      alt="image-20220130163503376"
+                ></p>
+<p>过程：建立连接（呼叫/电路建立）<br>&emsp;&emsp;&emsp;通信（数据传输）<br>&emsp;&emsp;&emsp;释放连接（拆除电路）</p>
+<h5 id="1-2-特点"><a href="#1-2-特点" class="headerlink" title="1-2.特点"></a>1-2.特点</h5><p><strong>独占</strong>资源，用户始终占用端到端的固定传输带宽。</p>
+<p>适用于<strong>远程批处理</strong>信息传输或系统间<strong>实时性</strong>要求高的<strong>大量数据</strong>传输的情况。</p>
+<h5 id="1-3-优点"><a href="#1-3-优点" class="headerlink" title="1-3.优点"></a>1-3.优点</h5><ul>
+<li><strong>传输时延小</strong>。</li>
+<li>数据<strong>顺序传送</strong>，无失序问题。</li>
+<li><strong>实时性</strong>强，双方一旦建立物理通路，便可以实时通信，适用于交互式会话类通信。</li>
+<li><strong>全双工</strong>通信，没有冲突，通信双方有不同的信道，不会争用物理信道。</li>
+<li>适用于<strong>模拟信号和数字信号</strong>。</li>
+<li>控制<strong>简单</strong>，电路的交换设备及控制较简单。</li>
+</ul>
+<h5 id="1-4-缺点"><a href="#1-4-缺点" class="headerlink" title="1-4.缺点"></a>1-4.缺点</h5><ul>
+<li>建立<strong>连接</strong>时间长。</li>
+<li>线路<strong>独占</strong>，即使通信线路空闲，也不能供其他用户使用，信道使用效率低。</li>
+<li>灵活性差，双方连接通路中的<strong>任何一点</strong>出了故障，必须重新拨号建立新连接，不适应突发性通信。</li>
+<li>无数据存储能力，难以平滑通信量。</li>
+<li>电路交换时，数据直达，不同类型、不同规格、不同速率的终端很难相互进行通信。</li>
+<li>无法发现与纠正传输差错，难以在通信过程中进行<strong>差错控制</strong>。</li>
+</ul>
+<h1 id="2-报文交换"><a href="#2-报文交换" class="headerlink" title="2.报文交换"></a>2.报文交换</h1><h5 id="2-1-报文"><a href="#2-1-报文" class="headerlink" title="2-1.报文"></a>2-1.报文</h5><p>报文（message）是网络中交换与传输的数据单元，即站点<strong>一次性要发送的数据块</strong>。</p>
+<p>报文包含了将要发送的完整的数据信息，其长短很不一致，长度不限且可变。</p>
+<h5 id="2-2-原理"><a href="#2-2-原理" class="headerlink" title="2-2.原理"></a>2-2.原理</h5><p>无需在两个站点之间建立专用通路，其数据传输的单位是报文，传送过程采用<strong>存储转发</strong>方式。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201301725076.png"
+                      alt="image-20220130172500037"
+                ></p>
+<p>过程：</p>
+<ul>
+<li>每个节点收下整个报文后，暂存报文并检查有无错误。</li>
+<li>节点需要的输出电路空闲时，利用路由信息找到并传送给下一个结点地址。</li>
+<li>两个通信用户间的其他线路段，可传输其他用户的报文，不像电路交换那样必须占用端到端的全部信道。</li>
+</ul>
+<h5 id="2-3-优点"><a href="#2-3-优点" class="headerlink" title="2-3.优点"></a>2-3.优点</h5><ul>
+<li>无需建立连接，无建立连接时延，用户可<strong>随时发送</strong>报文。</li>
+<li>动态分配线路，动态选择报文通过的<strong>最佳路径</strong>，可以平滑通信量。</li>
+<li>提高线路<strong>可靠性</strong>，某条传输路径发生故障，可重新选择另一条路径传输。</li>
+<li>提高线路<strong>利用率</strong>，通信双方在不同的时间一段一段地部分占有这条物理通道，多个报文可共享信道。</li>
+<li>提供多目标服务，一个报文可同时发往多个目的地址。</li>
+<li>在存储转发中容易实现代码转换和速率匹配，甚至收发双方可以不同时处于可用状态。这样就便于类型、规格和速度不同的计算机之间进行通信。</li>
+</ul>
+<h5 id="2-4-缺点"><a href="#2-4-缺点" class="headerlink" title="2-4.缺点"></a>2-4.缺点</h5><p><strong>实时性差</strong>，不适合传送实时或交互式业务的数据。数据进入交换结点后要经历存储转发过程，从而引起<strong>转发时延</strong>。</p>
+<p>只适用于<strong>数字信号</strong>。</p>
+<p>由于报文长度没有限制，而每个中间结点都要完整地接收传来的整个报文，当输出线路不空闲时，还可能要存储几个完整报文等待转发，要求网络中每个结点有<strong>较大的缓冲区</strong>。为了降低成本，减少结点的缓冲存储器的容量，有时要把等待转发的报文存在磁盘上，进一步增加了传送时延。</p>
+<h1 id="3-分组交换"><a href="#3-分组交换" class="headerlink" title="3.分组交换"></a>3.分组交换</h1><h5 id="3-1-分组"><a href="#3-1-分组" class="headerlink" title="3-1.分组"></a>3-1.分组</h5><p>大多数计算机网络都不能连续地传送任意长的数据，所以实际上网络系统<strong>把数据分割成小块</strong>，然后逐块地发送。这种小块就称作分组（packet）。</p>
+<p>小数据块 + 控制信息(起止地址、编号) = 分组</p>
+<h5 id="3-2-原理"><a href="#3-2-原理" class="headerlink" title="3-2.原理"></a>3-2.原理</h5><p>分组交换与报文交换的工作方式基本相同，都采用<strong>存储转发</strong>方式。</p>
+<p>形式上的主要差别在于，分组交换网中要限制所传输的数据单位的长度，一般选128B。</p>
+<p>过程：</p>
+<ul>
+<li>发送节点首先对从终端设备送来的数据报文进行接收、存储，而后将报文划分成一定长度的分组，并以分组为单位进行传输和交换。</li>
+<li>接收结点将收到的分组组装成信息或报文。</li>
+</ul>
+<h5 id="3-3-优点"><a href="#3-3-优点" class="headerlink" title="3-3.优点"></a>3-3.优点</h5><ul>
+<li>无建立时延，无需为通信双方预先建立一条专用通信线路，用户可<strong>随时发送</strong>分组。</li>
+<li>线路<strong>利用率高</strong>，通信双方在不同的时间，一段一段地部分占有这条物理通道，多个分组可共享信道。</li>
+<li>简化了<strong>存储管理</strong>。因为分组的长度固定，相应的缓冲区的大小也固定，在交换结点中存储器的管理通常被简化为对缓冲区的管理，相对比较容易。</li>
+<li>减少出错几率和重发数据量，提高可靠性，减少传输时延。</li>
+<li>分组短小，适用于计算机之间<strong>突发式数据通信</strong>。</li>
+</ul>
+<h5 id="3-4-缺点"><a href="#3-4-缺点" class="headerlink" title="3-4.缺点"></a>3-4.缺点</h5><ul>
+<li>尽管分组交换比报文交换的传输时延少，但仍有存储转发时延，且其结点交换机必须具有更强的<strong>处理能力</strong>。</li>
+<li>每个分组都要加控制信息，—定程度上降低了<strong>通信效率</strong>,增加了处理的时间。</li>
+<li>当分组交换采用<em><strong>数据报服务</strong></em>时，可能出现失序、丢失或重复分组，分组到达目的结点时，要对分组按编号进行排序等工作，增加了麻烦。若采用<em><strong>虚电路服务</strong></em>，虽无失序问题，但有呼叫建立、数据传输和虚电路释放三个过程。</li>
+</ul>
+<h1 id="4-数据报和虚电路"><a href="#4-数据报和虚电路" class="headerlink" title="4.数据报和虚电路"></a>4.数据报和虚电路</h1><p>分组交换包括数据报和虚电路两种方式。</p>
+<h5 id="4-1-数据报方式"><a href="#4-1-数据报方式" class="headerlink" title="4-1.数据报方式"></a>4-1.数据报方式</h5><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201302053804.png"
+                      alt="image-20220130205342759"
+                ></p>
+<ol>
+<li>源主机(A)将报文分成多个分组，依次发送到直接相连的结点(A)。</li>
+<li>结点A收到分组后，对每个分组差错检测和路由选择，不同分组的下一跳结点可能不同。</li>
+<li>结点C收到分组P1后，对分组P1进行差错检测，若正确则向A发送确认信息，A收到C确认后则丢弃分组P1副本。</li>
+<li>最终所有分组到达主机B。-</li>
+</ol>
+<h5 id="4-2-虚电路方式"><a href="#4-2-虚电路方式" class="headerlink" title="4-2.虚电路方式"></a>4-2.虚电路方式</h5><p>虚电路将数据报方式和电路交换方式结合，以发挥两者优点。</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201302101665.png"
+                      alt="image-20220130210132618" style="zoom:100%;" 
+                >
+
+<p>虚电路∶一条源主机到目的主机，类似于电路的路径（逻辑连接），路径上所有结点都要维持这条虚电路的建立，都维持一张虚电路表，每一项记录了一个打开的虚电路的信息。<br>（在数据报的方式确定一条固定的路径）</p>
+<h5 id="4-3-二者对比"><a href="#4-3-二者对比" class="headerlink" title="4-3.二者对比"></a>4-3.二者对比</h5><table>
+<thead>
+<tr>
+<th></th>
+<th>数据报服务</th>
+<th>虚电路服务</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>连接的建立</td>
+<td>不要</td>
+<td>必须有</td>
+</tr>
+<tr>
+<td>目的地址</td>
+<td>每个分组都有完整的目的地址</td>
+<td>仅在建立连接阶段使用，之后每个分组使用长度较短的虚电路号</td>
+</tr>
+<tr>
+<td>路由选择</td>
+<td>每个分组独立地进行路由选择和转发</td>
+<td>属于同一条虚电路的分组按照同一路由转发</td>
+</tr>
+<tr>
+<td>分组顺序</td>
+<td>不保证分组的有序到达</td>
+<td>保证分组的有序到达</td>
+</tr>
+<tr>
+<td>可靠性</td>
+<td>不保证可靠通信，可靠性由用户主机来保证</td>
+<td>保证分组的有序到达</td>
+</tr>
+<tr>
+<td>对网络故障的适应性</td>
+<td>出故障的结点丢失分组，其他分组路径选择发生变化，可正常传输</td>
+<td>所有经过故障结点的虚电路均不能正常工作</td>
+</tr>
+<tr>
+<td>差错处理和流量控制</td>
+<td>由用户主机进行流量控制，不保证数据报的可靠性</td>
+<td>可由分组交换网负责，也可由用户主机负责</td>
+</tr>
+</tbody></table>
+<h1 id="5-交换方式对比"><a href="#5-交换方式对比" class="headerlink" title="5.交换方式对比"></a>5.交换方式对比</h1><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201302012530.png"
+                      alt="image-20220130201232480" style="zoom:150%;" 
+                >
+
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201302014602.png"
+                      alt="image-20220130201401552" style="zoom:120%;" 
+                >
+
+<ol>
+<li>传送数据量大，且传送时间远大于呼叫时间，选择电路交换。电路交换传输时延最小。</li>
+<li>当端到端的通路有很多段的链路组成时,采用分组交换传送数据较为合适。</li>
+<li>从信道利用率上看，报文交换和分组交换优于电路交换，其中分组交换比报文交换的时延小，尤其适合于计算机之间的突发式的数据通信。</li>
+</ol>
+<h1 id="5-总结"><a href="#5-总结" class="headerlink" title="5.总结"></a>5.总结</h1><ol>
+<li>电路交换</li>
+<li>报文交换</li>
+<li>分组交换</li>
+</ol>
+<p>2 和 3 采用<strong>存储转发</strong>地交换方式</p>
+<p>3 包括<strong>数据报</strong>方式和<strong>虚电路</strong>方式</p>
+
         </div>
 
         
@@ -524,7 +693,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        
+        <ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link"><span class="nav-text"></span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2"><span class="nav-text">1.电路交换</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-%E5%8E%9F%E7%90%86"><span class="nav-text">1-1.原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-%E7%89%B9%E7%82%B9"><span class="nav-text">1-2.特点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-%E4%BC%98%E7%82%B9"><span class="nav-text">1-3.优点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-4-%E7%BC%BA%E7%82%B9"><span class="nav-text">1-4.缺点</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%8A%A5%E6%96%87%E4%BA%A4%E6%8D%A2"><span class="nav-text">2.报文交换</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-%E6%8A%A5%E6%96%87"><span class="nav-text">2-1.报文</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-%E5%8E%9F%E7%90%86"><span class="nav-text">2-2.原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-%E4%BC%98%E7%82%B9"><span class="nav-text">2-3.优点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4-%E7%BC%BA%E7%82%B9"><span class="nav-text">2-4.缺点</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="nav-text">3.分组交换</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-%E5%88%86%E7%BB%84"><span class="nav-text">3-1.分组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-%E5%8E%9F%E7%90%86"><span class="nav-text">3-2.原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-%E4%BC%98%E7%82%B9"><span class="nav-text">3-3.优点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-4-%E7%BC%BA%E7%82%B9"><span class="nav-text">3-4.缺点</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E6%95%B0%E6%8D%AE%E6%8A%A5%E5%92%8C%E8%99%9A%E7%94%B5%E8%B7%AF"><span class="nav-text">4.数据报和虚电路</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%96%B9%E5%BC%8F"><span class="nav-text">4-1.数据报方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-%E8%99%9A%E7%94%B5%E8%B7%AF%E6%96%B9%E5%BC%8F"><span class="nav-text">4-2.虚电路方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-3-%E4%BA%8C%E8%80%85%E5%AF%B9%E6%AF%94"><span class="nav-text">4-3.二者对比</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E4%BA%A4%E6%8D%A2%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94"><span class="nav-text">5.交换方式对比</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E6%80%BB%E7%BB%93"><span class="nav-text">5.总结</span></a>
     </div>
 </div>
         </aside>
