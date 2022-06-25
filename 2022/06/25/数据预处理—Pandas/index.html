@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="IT,计算机,computer,编程,program">
+    <meta name="description" content="IT,计算机,computer,编程,program">
+    <meta name="author" content="kai">
+	
+    <title>
+        
+            数据预处理—Pandas |
+        
+        KAI&#39;S NOTE
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="https://s2.loli.net/2022/01/09/FYOkzfXsd3VmBKG.png">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"kainote.top","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":false},"style":{"primary_color":"#339999","avatar":"https://s2.loli.net/2022/01/09/UtbhxHv2IA8jqwZ.jpg","favicon":"https://s2.loli.net/2022/01/09/FYOkzfXsd3VmBKG.png","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"https://s2.loli.net/2022/01/09/SRkdoGwVzcmqb5A.png","description":"三天打鱼(⊙ˍ⊙)两天晒网"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="https://cdn.jsdelivr.net/gh/kaix2301/pictures/img202201072101018.jpg">
+                </a>
+            
+            <a class="logo-title" href="/">
+                KAI&#39;S NOTE
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">数据预处理—Pandas</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="https://s2.loli.net/2022/01/09/UtbhxHv2IA8jqwZ.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">kai</span>
+                        
+                            <span class="author-label">(¬‿¬)</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-06-25 12:01:50</span>
+        <span class="mobile">2022-06-25 12:01</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86/">数据预处理</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86/">数据预处理</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Pandas/">Pandas</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>4.8k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>23 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h4 id=""><a href="#" class="headerlink" title=""></a></h4><h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h1><p>Pandas是Python第三方库，提供高性能易用数据类型和分析工具。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">192</span>]: <span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">In [<span class="number">193</span>]: pd.__version__</span><br></pre></td></tr></table></figure>
+
+<p>核心：</p>
+<p>​    两个数据类型Series,DataFrame</p>
+<ul>
+<li>基于上述数据类型的各类操作</li>
+<li>基本操作、运算操作、特征类操作、关联类操作</li>
+</ul>
+<p>对比：</p>
+<table>
+<thead>
+<tr>
+<th>NumPy</th>
+<th>Pandas</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>基础数据类型</td>
+<td>扩展数据类型</td>
+</tr>
+<tr>
+<td>关注数据的结构表达</td>
+<td>关注数据的应用表达</td>
+</tr>
+<tr>
+<td>维度和数据间关系</td>
+<td>数据与索引间关系</td>
+</tr>
+</tbody></table>
+<h1 id="2-Series类型"><a href="#2-Series类型" class="headerlink" title="2. Series类型"></a>2. Series类型</h1><p>series类型由一组数据及与之相关的数据索引组成</p>
+<h3 id="2-1-索引"><a href="#2-1-索引" class="headerlink" title="2.1 索引"></a>2.1 索引</h3><p>添加参数<code>index=[ , , , ]</code>自定义索引，不添加自动生成从0开始的索引。</p>
+<p><code>index=[ , , , ]</code>可直接简写为<code>[ , , , ]</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自动索引</span></span><br><span class="line">In [<span class="number">195</span>]: pd.Series([<span class="number">9</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">6</span>])</span><br><span class="line">Out[<span class="number">195</span>]: </span><br><span class="line"><span class="number">0</span>    <span class="number">9</span> <span class="comment"># 索引 数据</span></span><br><span class="line"><span class="number">1</span>    <span class="number">8</span></span><br><span class="line"><span class="number">2</span>    <span class="number">7</span></span><br><span class="line"><span class="number">3</span>    <span class="number">6</span></span><br><span class="line">dtype: int64 <span class="comment"># NumPy中的数据类型</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 自定义索引（“index=”可省略）</span></span><br><span class="line">In [<span class="number">197</span>]: pd.Series([<span class="number">9</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">6</span>], index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>])</span><br><span class="line">Out[<span class="number">197</span>]: </span><br><span class="line">a    <span class="number">9</span></span><br><span class="line">b    <span class="number">8</span></span><br><span class="line">c    <span class="number">7</span></span><br><span class="line">d    <span class="number">6</span></span><br><span class="line">dtype: int64</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-创建"><a href="#2-2-创建" class="headerlink" title="2.2 创建"></a>2.2 创建</h3><p>可以由如下类型创建：</p>
+<ul>
+<li>python列表（见2.1）</li>
+<li>标量值</li>
+<li>python字典</li>
+<li>ndarray</li>
+<li>其他函数（range等）</li>
+</ul>
+<p>标量值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不指定索引相当于一个值的列表</span></span><br><span class="line">In [<span class="number">201</span>]: pd.Series(<span class="number">25</span>, [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>])</span><br><span class="line">Out[<span class="number">201</span>]: </span><br><span class="line">a    <span class="number">25</span></span><br><span class="line">b    <span class="number">25</span></span><br><span class="line">c    <span class="number">25</span></span><br><span class="line">d    <span class="number">25</span></span><br><span class="line">dtype: int64</span><br></pre></td></tr></table></figure>
+
+<p>字典：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">203</span>]: pd.Series(&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">9</span>, <span class="string">&#x27;b&#x27;</span>:<span class="number">8</span>, <span class="string">&#x27;c&#x27;</span>:<span class="number">7</span>, <span class="string">&#x27;d&#x27;</span>:<span class="number">6</span>&#125;)</span><br><span class="line">Out[<span class="number">203</span>]: </span><br><span class="line">a    <span class="number">9</span></span><br><span class="line">b    <span class="number">8</span></span><br><span class="line">c    <span class="number">7</span></span><br><span class="line">d    <span class="number">6</span></span><br><span class="line">dtype: int64</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过index参数，从字典中挑选</span></span><br><span class="line">In [<span class="number">204</span>]: pd.Series(&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">9</span>, <span class="string">&#x27;b&#x27;</span>:<span class="number">8</span>, <span class="string">&#x27;c&#x27;</span>:<span class="number">7</span>, <span class="string">&#x27;d&#x27;</span>:<span class="number">6</span>&#125;, [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;e&#x27;</span>])</span><br><span class="line">Out[<span class="number">204</span>]: </span><br><span class="line">a    <span class="number">9.0</span></span><br><span class="line">c    <span class="number">7.0</span></span><br><span class="line">e    NaN</span><br><span class="line">dtype: float64</span><br></pre></td></tr></table></figure>
+
+<p>ndarray：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#内容01234，索引98765，index = 可省略</span></span><br><span class="line">In [<span class="number">205</span>]: pd.Series(np.arange(<span class="number">5</span>), index = np.arange(<span class="number">9</span>,<span class="number">4</span>,-<span class="number">1</span>))</span><br><span class="line">Out[<span class="number">205</span>]: </span><br><span class="line"><span class="number">9</span>    <span class="number">0</span></span><br><span class="line"><span class="number">8</span>    <span class="number">1</span></span><br><span class="line"><span class="number">7</span>    <span class="number">2</span></span><br><span class="line"><span class="number">6</span>    <span class="number">3</span></span><br><span class="line"><span class="number">5</span>    <span class="number">4</span></span><br><span class="line">dtype: int32</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-基本操作"><a href="#2-3-基本操作" class="headerlink" title="2.3 基本操作"></a>2.3 基本操作</h3><ul>
+<li>series类型包括index和values两部分</li>
+<li>series类型的操作类似ndarray类型</li>
+<li>Series类型的操作类似Python字典类型</li>
+</ul>
+<h5 id="获得索引或内容"><a href="#获得索引或内容" class="headerlink" title="获得索引或内容"></a>获得索引或内容</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">219</span>]: a</span><br><span class="line">Out[<span class="number">219</span>]: </span><br><span class="line">a    <span class="number">9.0</span></span><br><span class="line">c    <span class="number">7.0</span></span><br><span class="line">e    NaN</span><br><span class="line">dtype: float64</span><br><span class="line"></span><br><span class="line">In [<span class="number">220</span>]: a.index</span><br><span class="line">Out[<span class="number">220</span>]: Index([<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;e&#x27;</span>], dtype=<span class="string">&#x27;object&#x27;</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">221</span>]: a.values</span><br><span class="line">Out[<span class="number">221</span>]: array([ <span class="number">9.</span>,  <span class="number">7.</span>, nan])</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过索引取值"><a href="#通过索引取值" class="headerlink" title="通过索引取值"></a>通过索引取值</h5><p>​    自定义索引与自动索引并存，但不能混合使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">222</span>]: a[<span class="string">&#x27;c&#x27;</span>] <span class="comment"># 自定义索引</span></span><br><span class="line">Out[<span class="number">222</span>]: <span class="number">7.0</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">223</span>]: a[<span class="number">1</span>] <span class="comment"># 自动索引</span></span><br><span class="line">Out[<span class="number">223</span>]: <span class="number">7.0</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">224</span>]: a[[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]] <span class="comment"># 自定义索引取多值</span></span><br><span class="line">Out[<span class="number">224</span>]: </span><br><span class="line">a    <span class="number">9.0</span></span><br><span class="line">c    <span class="number">7.0</span></span><br><span class="line">dtype: float64</span><br><span class="line"></span><br><span class="line">In [<span class="number">225</span>]: a[[<span class="number">0</span>, <span class="number">1</span>]] <span class="comment"># 自动索引取多值</span></span><br><span class="line">Out[<span class="number">225</span>]: </span><br><span class="line">a    <span class="number">9.0</span></span><br><span class="line">c    <span class="number">7.0</span></span><br><span class="line">dtype: float64</span><br><span class="line"></span><br><span class="line">In [<span class="number">226</span>]: a[[<span class="string">&#x27;a&#x27;</span>, <span class="number">1</span>]] <span class="comment"># 混合使用 错误❌</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="类似ndarray的操作"><a href="#类似ndarray的操作" class="headerlink" title="类似ndarray的操作"></a>类似ndarray的操作</h5><ul>
+<li>索引方法相同，采用[]</li>
+<li>NumPy中运算和操作可用于series类型</li>
+<li>可以通过自定义索引的列表进行切片</li>
+<li>可以通过自动索引进行切片，如果存在自定义索引，则一同被切片</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">236</span>]: a</span><br><span class="line">Out[<span class="number">236</span>]: </span><br><span class="line">a    <span class="number">9</span></span><br><span class="line">b    <span class="number">8</span></span><br><span class="line">c    <span class="number">7</span></span><br><span class="line">d    <span class="number">6</span></span><br><span class="line">e    <span class="number">5</span></span><br><span class="line">dtype: int64</span><br><span class="line"></span><br><span class="line">In [<span class="number">238</span>]: a[<span class="number">1</span>] <span class="comment"># 索引</span></span><br><span class="line">Out[<span class="number">238</span>]: <span class="number">8</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">239</span>]: a[<span class="number">1</span>:<span class="number">4</span>:<span class="number">2</span>] <span class="comment"># 切片-[1,4)中步长为1</span></span><br><span class="line">Out[<span class="number">239</span>]: </span><br><span class="line">b    <span class="number">8</span></span><br><span class="line">d    <span class="number">6</span></span><br><span class="line">dtype: int64</span><br><span class="line">    </span><br><span class="line">In [<span class="number">247</span>]: a[a &gt; a.median()] <span class="comment"># 切片-大于中位数的部分</span></span><br><span class="line">Out[<span class="number">247</span>]: </span><br><span class="line">a    <span class="number">9</span></span><br><span class="line">b    <span class="number">8</span></span><br><span class="line">dtype: int64</span><br><span class="line"></span><br><span class="line">In [<span class="number">249</span>]: np.exp(a) <span class="comment"># numpy中的操作</span></span><br><span class="line">Out[<span class="number">249</span>]: </span><br><span class="line">a    <span class="number">8103.083928</span></span><br><span class="line">b    <span class="number">2980.957987</span></span><br><span class="line">c    <span class="number">1096.633158</span></span><br><span class="line">d     <span class="number">403.428793</span></span><br><span class="line">e     <span class="number">148.413159</span></span><br><span class="line">dtype: float64</span><br></pre></td></tr></table></figure>
+
+<h5 id="类似字典的操作"><a href="#类似字典的操作" class="headerlink" title="类似字典的操作"></a>类似字典的操作</h5><ul>
+<li>通过自定义索引访问</li>
+<li>保留字in操作</li>
+<li>使用<code>.get()</code>方法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">250</span>]: a</span><br><span class="line">Out[<span class="number">250</span>]: </span><br><span class="line">a    <span class="number">9</span></span><br><span class="line">b    <span class="number">8</span></span><br><span class="line">c    <span class="number">7</span></span><br><span class="line">d    <span class="number">6</span></span><br><span class="line">e    <span class="number">5</span></span><br><span class="line">dtype: int64</span><br><span class="line"></span><br><span class="line">In [<span class="number">251</span>]: a[<span class="string">&#x27;b&#x27;</span>] <span class="comment"># 索引</span></span><br><span class="line">Out[<span class="number">251</span>]: <span class="number">8</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">252</span>]: <span class="string">&#x27;b&#x27;</span> <span class="keyword">in</span> a <span class="comment"># 索引是否存在</span></span><br><span class="line">Out[<span class="number">252</span>]: <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">253</span>]: <span class="number">8</span> <span class="keyword">in</span> a</span><br><span class="line">Out[<span class="number">253</span>]: <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">254</span>]: a.get(<span class="string">&#x27;b&#x27;</span>, <span class="number">100</span>) <span class="comment"># 索引方式2</span></span><br><span class="line">Out[<span class="number">254</span>]: <span class="number">8</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">255</span>]: a.get(<span class="string">&#x27;t&#x27;</span>, <span class="number">100</span>)</span><br><span class="line">Out[<span class="number">255</span>]: <span class="number">100</span></span><br><span class="line">    </span><br><span class="line">In [<span class="number">256</span>]: a[<span class="string">&#x27;f&#x27;</span>] = <span class="number">4</span> <span class="comment"># 添加   </span></span><br></pre></td></tr></table></figure>
+
+<h5 id="对齐操作"><a href="#对齐操作" class="headerlink" title="对齐操作"></a>对齐操作</h5><p>a和b操作结果：</p>
+<ul>
+<li>索引维a和b并集</li>
+<li>内容为a和b操作结果</li>
+<li>与nan操作，结果为nan</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">257</span>]: a</span><br><span class="line">Out[<span class="number">257</span>]: </span><br><span class="line">a    <span class="number">9</span></span><br><span class="line">b    <span class="number">8</span></span><br><span class="line">c    <span class="number">7</span></span><br><span class="line">d    <span class="number">6</span></span><br><span class="line">e    <span class="number">5</span></span><br><span class="line">dtype: int64</span><br><span class="line"></span><br><span class="line">In [<span class="number">258</span>]: b</span><br><span class="line">Out[<span class="number">258</span>]: </span><br><span class="line">d    <span class="number">6</span></span><br><span class="line">e    <span class="number">5</span></span><br><span class="line">f    <span class="number">4</span></span><br><span class="line">dtype: int64</span><br><span class="line"></span><br><span class="line">In [<span class="number">259</span>]: a + b</span><br><span class="line">Out[<span class="number">259</span>]: </span><br><span class="line">a     NaN</span><br><span class="line">b     NaN</span><br><span class="line">c     NaN</span><br><span class="line">d    <span class="number">12.0</span></span><br><span class="line">e    <span class="number">10.0</span></span><br><span class="line">f     NaN</span><br><span class="line">dtype: float64</span><br></pre></td></tr></table></figure>
+
+<h5 id="name属性"><a href="#name属性" class="headerlink" title="name属性"></a>name属性</h5><ul>
+<li><code>a.name</code></li>
+<li><code>a.index.name</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">266</span>]: a.name = <span class="string">&#x27;Series对象a&#x27;</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">267</span>]: a.index.name = <span class="string">&#x27;索引&#x27;</span></span><br><span class="line">    </span><br><span class="line">In [<span class="number">269</span>]: a</span><br><span class="line">Out[<span class="number">269</span>]: </span><br><span class="line">索引</span><br><span class="line">a    <span class="number">9</span></span><br><span class="line">b    <span class="number">8</span></span><br><span class="line">c    <span class="number">7</span></span><br><span class="line">d    <span class="number">6</span></span><br><span class="line">e    <span class="number">5</span></span><br><span class="line">Name: Series对象a, dtype: int64</span><br></pre></td></tr></table></figure>
+
+<h5 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h5><p>series对象可以随时修改并即刻生效</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">272</span>]: a</span><br><span class="line">Out[<span class="number">272</span>]: </span><br><span class="line">索引</span><br><span class="line">a    <span class="number">9</span></span><br><span class="line">b    <span class="number">8</span></span><br><span class="line">c    <span class="number">7</span></span><br><span class="line">d    <span class="number">6</span></span><br><span class="line">e    <span class="number">5</span></span><br><span class="line">Name: Series对象a, dtype: int64</span><br><span class="line"></span><br><span class="line">In [<span class="number">273</span>]: a.name = <span class="string">&#x27;myname&#x27;</span> <span class="comment"># 对象名</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">274</span>]: a.index.name = <span class="string">&#x27;ind&#x27;</span> <span class="comment"># 索引列名</span></span><br><span class="line">    </span><br><span class="line">In [<span class="number">277</span>]: a[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>] = <span class="number">10</span> <span class="comment"># 通过自定义索引修改</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">278</span>]: a[<span class="number">2</span>] = <span class="number">30</span> <span class="comment"># 通过自动索引修改</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">280</span>]: a[<span class="string">&#x27;f&#x27;</span>] = <span class="number">20</span> <span class="comment"># 添加一条</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">282</span>]: a</span><br><span class="line">Out[<span class="number">282</span>]: </span><br><span class="line">ind</span><br><span class="line">a    <span class="number">10</span></span><br><span class="line">b    <span class="number">10</span></span><br><span class="line">c    <span class="number">30</span></span><br><span class="line">d     <span class="number">6</span></span><br><span class="line">e     <span class="number">5</span></span><br><span class="line">f    <span class="number">20</span></span><br><span class="line">Name: myname, dtype: int64</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-DataFrame"><a href="#3-DataFrame" class="headerlink" title="3. DataFrame"></a>3. DataFrame</h1><h3 id="3-1-简洁"><a href="#3-1-简洁" class="headerlink" title="3.1 简洁"></a>3.1 简洁</h3><ul>
+<li>DataFrame是一个表格型的数据类型，每列值类型可以不同</li>
+<li>DataFrame既有行索引、也有列索引</li>
+<li>DataFrame常用于表达二维数据，但可以表达多维数据</li>
+</ul>
+<p>DataFrame类型由共用相同索引的一组列组成</p>
+<p>​        <em><strong>index_0 → data_a  data_1        data_w</strong></em></p>
+<p>​        <em><strong>index_1 → data_b  data_2 …… data_x</strong></em></p>
+<p>​        <em><strong>index_2 → data_c  data_3        data_y</strong></em></p>
+<p>​        <em><strong>index_3 → data_d  data_4        data_z</strong></em></p>
+<p>​    index_0 index_1 … 方向：index，axis=0</p>
+<p>​    index_0 data_a … 方向：column，axis=1</p>
+<h3 id="3-2-创建"><a href="#3-2-创建" class="headerlink" title="3.2 创建"></a>3.2 创建</h3><p>DataFrame类型可以由如下类型创建：</p>
+<ul>
+<li>二维ndarray对象</li>
+<li>由一维ndarray、列表、字典、元组或series构成的字典</li>
+<li>series类型</li>
+<li>其他的DataFrame类型</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 二维ndarray对象</span></span><br><span class="line"><span class="comment"># 自动索引</span></span><br><span class="line">In [<span class="number">284</span>]: pd.DataFrame(np.arange(<span class="number">12</span>).reshape(<span class="number">3</span>,<span class="number">4</span>))</span><br><span class="line">Out[<span class="number">284</span>]: </span><br><span class="line">   <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line"><span class="number">0</span>  <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line"><span class="number">1</span>  <span class="number">4</span>  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line"><span class="number">2</span>  <span class="number">8</span>  <span class="number">9</span>  <span class="number">10</span>  <span class="number">11</span></span><br><span class="line"><span class="comment"># 自定义索引</span></span><br><span class="line">In [<span class="number">312</span>]: pd.DataFrame(np.arange(<span class="number">4</span>).reshape(<span class="number">2</span>,<span class="number">2</span>),</span><br><span class="line">                       index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>],</span><br><span class="line">                       columns=[<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>])</span><br><span class="line">Out[<span class="number">312</span>]: </span><br><span class="line">   c  d</span><br><span class="line">a  <span class="number">0</span>  <span class="number">1</span></span><br><span class="line">b  <span class="number">2</span>  <span class="number">3</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># series字典，自定义索引</span></span><br><span class="line"><span class="comment"># 字典关键字为列索引，series字典索引为行索引</span></span><br><span class="line">In [<span class="number">287</span>]: dt = &#123;</span><br><span class="line">    <span class="string">&#x27;one&#x27;</span>:pd.Series([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>]),</span><br><span class="line">	<span class="string">&#x27;two&#x27;</span>:pd.Series([<span class="number">9</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">6</span>],index[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>])</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 有相同行号，后面的覆盖前面的</span></span><br><span class="line">In [<span class="number">288</span>]: pd.DataFrame(dt)</span><br><span class="line">Out[<span class="number">288</span>]: </span><br><span class="line">   one  two</span><br><span class="line">a  <span class="number">1.0</span>    <span class="number">9</span></span><br><span class="line">b  <span class="number">2.0</span>    <span class="number">8</span></span><br><span class="line">c  <span class="number">3.0</span>    <span class="number">7</span></span><br><span class="line">d  NaN    <span class="number">6</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 列表字典</span></span><br><span class="line">In [<span class="number">289</span>]: d = &#123;<span class="string">&#x27;one&#x27;</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], <span class="string">&#x27;two&#x27;</span>:[<span class="number">9</span>,<span class="number">8</span>,<span class="number">7</span>]&#125;</span><br><span class="line"><span class="comment"># 自动行索引</span></span><br><span class="line">In [<span class="number">290</span>]: pd.DataFrame(d)</span><br><span class="line">Out[<span class="number">290</span>]: </span><br><span class="line">   one  two</span><br><span class="line"><span class="number">0</span>    <span class="number">1</span>    <span class="number">9</span></span><br><span class="line"><span class="number">1</span>    <span class="number">2</span>    <span class="number">8</span></span><br><span class="line"><span class="number">2</span>    <span class="number">3</span>    <span class="number">7</span></span><br><span class="line"><span class="comment"># 自定义行索引</span></span><br><span class="line">In [<span class="number">292</span>]: pd.DataFrame(d,index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>])</span><br><span class="line">Out[<span class="number">292</span>]: </span><br><span class="line">   one  two</span><br><span class="line">a    <span class="number">1</span>    <span class="number">9</span></span><br><span class="line">b    <span class="number">2</span>    <span class="number">8</span></span><br><span class="line">c    <span class="number">3</span>    <span class="number">7</span></span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<table>
+<thead>
+<tr>
+<th>城市</th>
+<th>环比</th>
+<th>同比</th>
+<th>定基</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>北京</td>
+<td>101.5</td>
+<td>120.7</td>
+<td>121.4</td>
+</tr>
+<tr>
+<td>上海</td>
+<td>101.2</td>
+<td>127.3</td>
+<td>127.8</td>
+</tr>
+<tr>
+<td>广州</td>
+<td>101.3</td>
+<td>119.4</td>
+<td>120.0</td>
+</tr>
+<tr>
+<td>深圳</td>
+<td>102.0</td>
+<td>140.9</td>
+<td>145.5</td>
+</tr>
+<tr>
+<td>沈阳</td>
+<td>100.1</td>
+<td>101.4</td>
+<td>101.6</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">293</span>]: d = &#123;</span><br><span class="line">    <span class="string">&#x27;城市&#x27;</span>:[<span class="string">&#x27;北京&#x27;</span>,<span class="string">&#x27;上海&#x27;</span>,<span class="string">&#x27;广州&#x27;</span>,<span class="string">&#x27;深圳&#x27;</span>,<span class="string">&#x27;沈阳&#x27;</span>], </span><br><span class="line">    <span class="string">&#x27;环比&#x27;</span>:[<span class="number">101.5</span>,<span class="number">101.2</span>,<span class="number">101.3</span>,<span class="number">102.0</span>,<span class="number">100.1</span>],</span><br><span class="line">    <span class="string">&#x27;同比&#x27;</span>:[<span class="number">120.7</span>,<span class="number">127.3</span>,<span class="number">119.4</span>,<span class="number">140.9</span>,<span class="number">101.4</span>],</span><br><span class="line">    <span class="string">&#x27;定基&#x27;</span>:[<span class="number">121.4</span>,<span class="number">127.8</span>,<span class="number">120.0</span>,<span class="number">145.5</span>,<span class="number">101.6</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">In [<span class="number">294</span>]: data = pd.DataFrame(d,index=[<span class="string">&#x27;c1&#x27;</span>,<span class="string">&#x27;c2&#x27;</span>,<span class="string">&#x27;c3&#x27;</span>,<span class="string">&#x27;c4&#x27;</span>,<span class="string">&#x27;c5&#x27;</span>])</span><br><span class="line"></span><br><span class="line">In [<span class="number">295</span>]: data</span><br><span class="line">Out[<span class="number">295</span>]: </span><br><span class="line">    城市     环比     同比     定基</span><br><span class="line">c1  北京  <span class="number">101.5</span>  <span class="number">120.7</span>  <span class="number">121.4</span></span><br><span class="line">c2  上海  <span class="number">101.2</span>  <span class="number">127.3</span>  <span class="number">127.8</span></span><br><span class="line">c3  广州  <span class="number">101.3</span>  <span class="number">119.4</span>  <span class="number">120.0</span></span><br><span class="line">c4  深圳  <span class="number">102.0</span>  <span class="number">140.9</span>  <span class="number">145.5</span></span><br><span class="line">c5  沈阳  <span class="number">100.1</span>  <span class="number">101.4</span>  <span class="number">101.6</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-查询"><a href="#3-3-查询" class="headerlink" title="3.3 查询"></a>3.3 查询</h3><p>以上面城市表为例</p>
+<h5 id="查询行名、列名、数据"><a href="#查询行名、列名、数据" class="headerlink" title="查询行名、列名、数据"></a>查询行名、列名、数据</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">296</span>]: data.index</span><br><span class="line">Out[<span class="number">296</span>]: Index([<span class="string">&#x27;c1&#x27;</span>, <span class="string">&#x27;c2&#x27;</span>, <span class="string">&#x27;c3&#x27;</span>, <span class="string">&#x27;c4&#x27;</span>, <span class="string">&#x27;c5&#x27;</span>], dtype=<span class="string">&#x27;object&#x27;</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">297</span>]: data.columns</span><br><span class="line">Out[<span class="number">297</span>]: Index([<span class="string">&#x27;城市&#x27;</span>, <span class="string">&#x27;环比&#x27;</span>, <span class="string">&#x27;同比&#x27;</span>, <span class="string">&#x27;定基&#x27;</span>], dtype=<span class="string">&#x27;object&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">In [<span class="number">299</span>]: data.values</span><br><span class="line">Out[<span class="number">299</span>]: </span><br><span class="line">array([[<span class="string">&#x27;北京&#x27;</span>, <span class="number">101.5</span>, <span class="number">120.7</span>, <span class="number">121.4</span>],</span><br><span class="line">       [<span class="string">&#x27;上海&#x27;</span>, <span class="number">101.2</span>, <span class="number">127.3</span>, <span class="number">127.8</span>],</span><br><span class="line">       [<span class="string">&#x27;广州&#x27;</span>, <span class="number">101.3</span>, <span class="number">119.4</span>, <span class="number">120.0</span>],</span><br><span class="line">       [<span class="string">&#x27;深圳&#x27;</span>, <span class="number">102.0</span>, <span class="number">140.9</span>, <span class="number">145.5</span>],</span><br><span class="line">       [<span class="string">&#x27;沈阳&#x27;</span>, <span class="number">100.1</span>, <span class="number">101.4</span>, <span class="number">101.6</span>]], dtype=<span class="built_in">object</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="查询某列"><a href="#查询某列" class="headerlink" title="查询某列"></a>查询某列</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># []不带列号</span></span><br><span class="line">In [<span class="number">305</span>]: data[<span class="string">&#x27;城市&#x27;</span>]</span><br><span class="line">Out[<span class="number">305</span>]: </span><br><span class="line">c1    北京</span><br><span class="line">c2    上海</span><br><span class="line">c3    广州</span><br><span class="line">c4    深圳</span><br><span class="line">c5    沈阳</span><br><span class="line">Name: 城市, dtype: <span class="built_in">object</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># [[]]带列号</span></span><br><span class="line">In [<span class="number">306</span>]: data[[<span class="string">&#x27;城市&#x27;</span>]]</span><br><span class="line">Out[<span class="number">306</span>]: </span><br><span class="line">    城市</span><br><span class="line">c1  北京</span><br><span class="line">c2  上海</span><br><span class="line">c3  广州</span><br><span class="line">c4  深圳</span><br><span class="line">c5  沈阳</span><br><span class="line"></span><br><span class="line">In [<span class="number">307</span>]: data[[<span class="string">&#x27;同比&#x27;</span>, <span class="string">&#x27;城市&#x27;</span>]]</span><br><span class="line">Out[<span class="number">307</span>]: </span><br><span class="line">       同比  城市</span><br><span class="line">c1  <span class="number">120.7</span>  北京</span><br><span class="line">c2  <span class="number">127.3</span>  上海</span><br><span class="line">c3  <span class="number">119.4</span>  广州</span><br><span class="line">c4  <span class="number">140.9</span>  深圳</span><br><span class="line">c5  <span class="number">101.4</span>  沈阳</span><br></pre></td></tr></table></figure>
+
+<h5 id="查询某行"><a href="#查询某行" class="headerlink" title="查询某行"></a>查询某行</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># []不带行号，竖放</span></span><br><span class="line">In [<span class="number">315</span>]: data.loc[<span class="string">&#x27;c1&#x27;</span>]</span><br><span class="line">Out[<span class="number">315</span>]: </span><br><span class="line">城市       北京</span><br><span class="line">环比    <span class="number">101.5</span></span><br><span class="line">同比    <span class="number">120.7</span></span><br><span class="line">定基    <span class="number">121.4</span></span><br><span class="line">Name: c1, dtype: <span class="built_in">object</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># [[]]带行号</span></span><br><span class="line">In [<span class="number">317</span>]: data.loc[[<span class="string">&#x27;c1&#x27;</span>]]</span><br><span class="line">Out[<span class="number">317</span>]: </span><br><span class="line">    城市     环比     同比     定基</span><br><span class="line">c1  北京  <span class="number">101.5</span>  <span class="number">120.7</span>  <span class="number">121.4</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">316</span>]: data.loc[[<span class="string">&#x27;c1&#x27;</span>,<span class="string">&#x27;c2&#x27;</span>]]</span><br><span class="line">Out[<span class="number">316</span>]: </span><br><span class="line">    城市     环比     同比     定基</span><br><span class="line">c1  北京  <span class="number">101.5</span>  <span class="number">120.7</span>  <span class="number">121.4</span></span><br><span class="line">c2  上海  <span class="number">101.2</span>  <span class="number">127.3</span>  <span class="number">127.8</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="查询某点"><a href="#查询某点" class="headerlink" title="查询某点"></a>查询某点</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">324</span>]: data.at[<span class="string">&#x27;c2&#x27;</span>, <span class="string">&#x27;环比&#x27;</span>]</span><br><span class="line">Out[<span class="number">324</span>]: <span class="number">101.2</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-索引操作"><a href="#3-4-索引操作" class="headerlink" title="3.4 索引操作"></a>3.4 索引操作</h3><p>如何改变series和DataFrame对象?</p>
+<ul>
+<li>增加或重排：reindex 重新索引 + 索引类型操作</li>
+<li>删除：drop 删除</li>
+</ul>
+<h5 id="Index类型操作"><a href="#Index类型操作" class="headerlink" title="Index类型操作"></a>Index类型操作</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">338</span>]: data.index</span><br><span class="line">Out[<span class="number">338</span>]: Index([<span class="string">&#x27;c1&#x27;</span>, <span class="string">&#x27;c2&#x27;</span>, <span class="string">&#x27;c3&#x27;</span>, <span class="string">&#x27;c4&#x27;</span>, <span class="string">&#x27;c5&#x27;</span>], dtype=<span class="string">&#x27;object&#x27;</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">339</span>]: data.columns</span><br><span class="line">Out[<span class="number">339</span>]: Index([<span class="string">&#x27;城市&#x27;</span>, <span class="string">&#x27;环比&#x27;</span>, <span class="string">&#x27;同比&#x27;</span>, <span class="string">&#x27;定基&#x27;</span>], dtype=<span class="string">&#x27;object&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>index和columns都是Index类型。</p>
+<p>常用方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.append(idx)</td>
+<td>连接另一个Index对象，产生新的Index对象</td>
+</tr>
+<tr>
+<td>.diff(idx)</td>
+<td>计算差集，产生新的Index对象</td>
+</tr>
+<tr>
+<td>.intersection(idx)</td>
+<td>计算交集</td>
+</tr>
+<tr>
+<td>.union(idx)</td>
+<td>计算并集</td>
+</tr>
+<tr>
+<td>.delete(loc)</td>
+<td>删除loc位置处的元素</td>
+</tr>
+<tr>
+<td>.insert( loc,e)</td>
+<td>在loc位置增加一个元素e</td>
+</tr>
+</tbody></table>
+<p>调用上述方法后生成新的索引，然后使用reindex方法修改DataFrame</p>
+<h5 id="重新索引"><a href="#重新索引" class="headerlink" title="重新索引"></a>重新索引</h5><p><code>.reindex()</code>能够改变或重排series和DataFrame索引</p>
+<p><code>.reindex(index=None, columns=None, ...)</code>的参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>index,columns</td>
+<td>新的行列自定义索引</td>
+</tr>
+<tr>
+<td>fill_value</td>
+<td>重新索引中，用于填充缺失位置的值</td>
+</tr>
+<tr>
+<td>method</td>
+<td>填充方法，ffill当前值向前填充，bfill向后填充</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>最大填充量</td>
+</tr>
+<tr>
+<td>copy</td>
+<td>默认True ，生成新的对象，False时，新旧相等不复制</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#原始数据</span></span><br><span class="line">In [<span class="number">327</span>]: data</span><br><span class="line">Out[<span class="number">327</span>]: </span><br><span class="line">    城市     环比     同比     定基</span><br><span class="line">c1  北京  <span class="number">101.5</span>  <span class="number">120.7</span>  <span class="number">121.4</span></span><br><span class="line">c2  上海  <span class="number">101.2</span>  <span class="number">127.3</span>  <span class="number">127.8</span></span><br><span class="line">c3  广州  <span class="number">101.3</span>  <span class="number">119.4</span>  <span class="number">120.0</span></span><br><span class="line">c4  深圳  <span class="number">102.0</span>  <span class="number">140.9</span>  <span class="number">145.5</span></span><br><span class="line">c5  沈阳  <span class="number">100.1</span>  <span class="number">101.4</span>  <span class="number">101.6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#重新指定index排序</span></span><br><span class="line">In [<span class="number">328</span>]: data.reindex(index=[<span class="string">&#x27;c5&#x27;</span>,<span class="string">&#x27;c4&#x27;</span>,<span class="string">&#x27;c3&#x27;</span>,<span class="string">&#x27;c2&#x27;</span>,<span class="string">&#x27;c1&#x27;</span>])</span><br><span class="line">Out[<span class="number">328</span>]: </span><br><span class="line">    城市     环比     同比     定基</span><br><span class="line">c5  沈阳  <span class="number">100.1</span>  <span class="number">101.4</span>  <span class="number">101.6</span></span><br><span class="line">c4  深圳  <span class="number">102.0</span>  <span class="number">140.9</span>  <span class="number">145.5</span></span><br><span class="line">c3  广州  <span class="number">101.3</span>  <span class="number">119.4</span>  <span class="number">120.0</span></span><br><span class="line">c2  上海  <span class="number">101.2</span>  <span class="number">127.3</span>  <span class="number">127.8</span></span><br><span class="line">c1  北京  <span class="number">101.5</span>  <span class="number">120.7</span>  <span class="number">121.4</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#重新指定columns排序</span></span><br><span class="line">In [<span class="number">329</span>]: data.reindex(columns=[<span class="string">&#x27;城市&#x27;</span>,<span class="string">&#x27;同比&#x27;</span>,<span class="string">&#x27;环比&#x27;</span>,<span class="string">&#x27;定基&#x27;</span>])</span><br><span class="line">Out[<span class="number">329</span>]: </span><br><span class="line">    城市     同比     环比     定基</span><br><span class="line">c1  北京  <span class="number">120.7</span>  <span class="number">101.5</span>  <span class="number">121.4</span></span><br><span class="line">c2  上海  <span class="number">127.3</span>  <span class="number">101.2</span>  <span class="number">127.8</span></span><br><span class="line">c3  广州  <span class="number">119.4</span>  <span class="number">101.3</span>  <span class="number">120.0</span></span><br><span class="line">c4  深圳  <span class="number">140.9</span>  <span class="number">102.0</span>  <span class="number">145.5</span></span><br><span class="line">c5  沈阳  <span class="number">101.4</span>  <span class="number">100.1</span>  <span class="number">101.6</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成新的columns，增加一列</span></span><br><span class="line">In [<span class="number">333</span>]: newcol = data.columns.insert(<span class="number">4</span>,<span class="string">&#x27;新增&#x27;</span>)</span><br><span class="line"><span class="comment"># 使用新columns，新位置用200填充</span></span><br><span class="line">In [<span class="number">334</span>]: data.reindex(columns=newcol, fill_value=<span class="number">200</span>)</span><br><span class="line">Out[<span class="number">334</span>]: </span><br><span class="line">    城市     环比     同比     定基   新增</span><br><span class="line">c1  北京  <span class="number">101.5</span>  <span class="number">120.7</span>  <span class="number">121.4</span>  <span class="number">200</span></span><br><span class="line">c2  上海  <span class="number">101.2</span>  <span class="number">127.3</span>  <span class="number">127.8</span>  <span class="number">200</span></span><br><span class="line">c3  广州  <span class="number">101.3</span>  <span class="number">119.4</span>  <span class="number">120.0</span>  <span class="number">200</span></span><br><span class="line">c4  深圳  <span class="number">102.0</span>  <span class="number">140.9</span>  <span class="number">145.5</span>  <span class="number">200</span></span><br><span class="line">c5  沈阳  <span class="number">100.1</span>  <span class="number">101.4</span>  <span class="number">101.6</span>  <span class="number">200</span></span><br><span class="line"><span class="comment"># 添加新行同上</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="删除某行-列"><a href="#删除某行-列" class="headerlink" title="删除某行/列"></a>删除某行/列</h5><p><code>.drop()</code>能够删除series和DataFrame指定行或列索引</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">364</span>]: data</span><br><span class="line">Out[<span class="number">364</span>]: </span><br><span class="line">    城市     环比     同比     定基</span><br><span class="line">c1  北京  <span class="number">101.5</span>  <span class="number">120.7</span>  <span class="number">121.4</span></span><br><span class="line">c2  上海  <span class="number">101.2</span>  <span class="number">127.3</span>  <span class="number">127.8</span></span><br><span class="line">c3  广州  <span class="number">101.3</span>  <span class="number">119.4</span>  <span class="number">120.0</span></span><br><span class="line">c4  深圳  <span class="number">102.0</span>  <span class="number">140.9</span>  <span class="number">145.5</span></span><br><span class="line">c5  沈阳  <span class="number">100.1</span>  <span class="number">101.4</span>  <span class="number">101.6</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">365</span>]: data.drop(<span class="string">&#x27;c3&#x27;</span>)</span><br><span class="line">Out[<span class="number">365</span>]: </span><br><span class="line">    城市     环比     同比     定基</span><br><span class="line">c1  北京  <span class="number">101.5</span>  <span class="number">120.7</span>  <span class="number">121.4</span></span><br><span class="line">c2  上海  <span class="number">101.2</span>  <span class="number">127.3</span>  <span class="number">127.8</span></span><br><span class="line">c4  深圳  <span class="number">102.0</span>  <span class="number">140.9</span>  <span class="number">145.5</span></span><br><span class="line">c5  沈阳  <span class="number">100.1</span>  <span class="number">101.4</span>  <span class="number">101.6</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">368</span>]: data.drop(<span class="string">&#x27;定基&#x27;</span>,axis=<span class="number">1</span>)</span><br><span class="line">Out[<span class="number">368</span>]: </span><br><span class="line">    城市     环比     同比</span><br><span class="line">c1  北京  <span class="number">101.5</span>  <span class="number">120.7</span></span><br><span class="line">c2  上海  <span class="number">101.2</span>  <span class="number">127.3</span></span><br><span class="line">c3  广州  <span class="number">101.3</span>  <span class="number">119.4</span></span><br><span class="line">c4  深圳  <span class="number">102.0</span>  <span class="number">140.9</span></span><br><span class="line">c5  沈阳  <span class="number">100.1</span>  <span class="number">101.4</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="4-运算"><a href="#4-运算" class="headerlink" title="4. 运算"></a>4. 运算</h1><h3 id="4-1-算数运算"><a href="#4-1-算数运算" class="headerlink" title="4.1 算数运算"></a>4.1 算数运算</h3><ul>
+<li>算术运算根据行列索引，补齐后运算</li>
+<li>运算默认产生浮点数</li>
+<li>补齐时缺项默认填充NaN(空值)</li>
+<li>二维和一维、一维和零维间为广播运算</li>
+<li>采用+- */符号进行的二元运算产生新的对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 测试数据</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">374</span>]: a</span><br><span class="line">Out[<span class="number">374</span>]: </span><br><span class="line">   <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line"><span class="number">0</span>  <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line"><span class="number">1</span>  <span class="number">4</span>  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line"><span class="number">2</span>  <span class="number">8</span>  <span class="number">9</span>  <span class="number">10</span>  <span class="number">11</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">375</span>]: b</span><br><span class="line">Out[<span class="number">375</span>]: </span><br><span class="line">    <span class="number">0</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line"><span class="number">0</span>   <span class="number">0</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line"><span class="number">1</span>   <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span>   <span class="number">8</span>   <span class="number">9</span></span><br><span class="line"><span class="number">2</span>  <span class="number">10</span>  <span class="number">11</span>  <span class="number">12</span>  <span class="number">13</span>  <span class="number">14</span></span><br><span class="line"><span class="number">3</span>  <span class="number">15</span>  <span class="number">16</span>  <span class="number">17</span>  <span class="number">18</span>  <span class="number">19</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">395</span>]: c</span><br><span class="line">Out[<span class="number">395</span>]: </span><br><span class="line">   <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span></span><br><span class="line"><span class="number">0</span>  <span class="number">3</span>  <span class="number">3</span>  <span class="number">3</span>  <span class="number">3</span></span><br><span class="line"><span class="number">1</span>  <span class="number">3</span>  <span class="number">3</span>  <span class="number">3</span>  <span class="number">3</span></span><br><span class="line"><span class="number">2</span>  <span class="number">3</span>  <span class="number">3</span>  <span class="number">3</span>  <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="直接运算"><a href="#直接运算" class="headerlink" title="直接运算"></a>直接运算</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">376</span>]: a + b</span><br><span class="line">Out[<span class="number">376</span>]: </span><br><span class="line">      <span class="number">0</span>     <span class="number">1</span>     <span class="number">2</span>     <span class="number">3</span>   <span class="number">4</span></span><br><span class="line"><span class="number">0</span>   <span class="number">0.0</span>   <span class="number">2.0</span>   <span class="number">4.0</span>   <span class="number">6.0</span> NaN</span><br><span class="line"><span class="number">1</span>   <span class="number">9.0</span>  <span class="number">11.0</span>  <span class="number">13.0</span>  <span class="number">15.0</span> NaN</span><br><span class="line"><span class="number">2</span>  <span class="number">18.0</span>  <span class="number">20.0</span>  <span class="number">22.0</span>  <span class="number">24.0</span> NaN</span><br><span class="line"><span class="number">3</span>   NaN   NaN   NaN   NaN NaN</span><br><span class="line"></span><br><span class="line">In [<span class="number">377</span>]: a * b</span><br><span class="line">Out[<span class="number">377</span>]: </span><br><span class="line">      <span class="number">0</span>     <span class="number">1</span>      <span class="number">2</span>      <span class="number">3</span>   <span class="number">4</span></span><br><span class="line"><span class="number">0</span>   <span class="number">0.0</span>   <span class="number">1.0</span>    <span class="number">4.0</span>    <span class="number">9.0</span> NaN</span><br><span class="line"><span class="number">1</span>  <span class="number">20.0</span>  <span class="number">30.0</span>   <span class="number">42.0</span>   <span class="number">56.0</span> NaN</span><br><span class="line"><span class="number">2</span>  <span class="number">80.0</span>  <span class="number">99.0</span>  <span class="number">120.0</span>  <span class="number">143.0</span> NaN</span><br><span class="line"><span class="number">3</span>   NaN   NaN    NaN    NaN NaN</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="使用方法运算"><a href="#使用方法运算" class="headerlink" title="使用方法运算"></a>使用方法运算</h5><ul>
+<li><code>.add(d, **argws)</code></li>
+<li><code>.sub( d, **argws)</code></li>
+<li><code>.mul(d，**argws)</code></li>
+<li><code>.div(d，**argws)</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">384</span>]: b.add(a)</span><br><span class="line">Out[<span class="number">384</span>]: </span><br><span class="line">      <span class="number">0</span>     <span class="number">1</span>     <span class="number">2</span>     <span class="number">3</span>   <span class="number">4</span></span><br><span class="line"><span class="number">0</span>   <span class="number">0.0</span>   <span class="number">2.0</span>   <span class="number">4.0</span>   <span class="number">6.0</span> NaN</span><br><span class="line"><span class="number">1</span>   <span class="number">9.0</span>  <span class="number">11.0</span>  <span class="number">13.0</span>  <span class="number">15.0</span> NaN</span><br><span class="line"><span class="number">2</span>  <span class="number">18.0</span>  <span class="number">20.0</span>  <span class="number">22.0</span>  <span class="number">24.0</span> NaN</span><br><span class="line"><span class="number">3</span>   NaN   NaN   NaN   NaN NaN</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 fill_value 替换 NAN 参加运算</span></span><br><span class="line">In [<span class="number">385</span>]: b.add(a, fill_value=<span class="number">100</span>)</span><br><span class="line">Out[<span class="number">385</span>]: </span><br><span class="line">       <span class="number">0</span>      <span class="number">1</span>      <span class="number">2</span>      <span class="number">3</span>      <span class="number">4</span></span><br><span class="line"><span class="number">0</span>    <span class="number">0.0</span>    <span class="number">2.0</span>    <span class="number">4.0</span>    <span class="number">6.0</span>  <span class="number">104.0</span></span><br><span class="line"><span class="number">1</span>    <span class="number">9.0</span>   <span class="number">11.0</span>   <span class="number">13.0</span>   <span class="number">15.0</span>  <span class="number">109.0</span></span><br><span class="line"><span class="number">2</span>   <span class="number">18.0</span>   <span class="number">20.0</span>   <span class="number">22.0</span>   <span class="number">24.0</span>  <span class="number">114.0</span></span><br><span class="line"><span class="number">3</span>  <span class="number">115.0</span>  <span class="number">116.0</span>  <span class="number">117.0</span>  <span class="number">118.0</span>  <span class="number">119.0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-比较运算"><a href="#4-2-比较运算" class="headerlink" title="4.2 比较运算"></a>4.2 比较运算</h3><h5 id="直接运算-1"><a href="#直接运算-1" class="headerlink" title="直接运算"></a>直接运算</h5><p>同大小，索引相同，才可以</p>
+<p>符号：==、!=、&lt;、&gt;、&lt;=、&gt;=</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">413</span>]: a &gt;= c</span><br><span class="line">Out[<span class="number">413</span>]: </span><br><span class="line">       <span class="number">0</span>      <span class="number">1</span>      <span class="number">2</span>     <span class="number">3</span></span><br><span class="line"><span class="number">0</span>  <span class="literal">False</span>  <span class="literal">False</span>  <span class="literal">False</span>  <span class="literal">True</span></span><br><span class="line"><span class="number">1</span>   <span class="literal">True</span>   <span class="literal">True</span>   <span class="literal">True</span>  <span class="literal">True</span></span><br><span class="line"><span class="number">2</span>   <span class="literal">True</span>   <span class="literal">True</span>   <span class="literal">True</span>  <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="使用方法运算-1"><a href="#使用方法运算-1" class="headerlink" title="使用方法运算"></a>使用方法运算</h5><p>大小和索引可以不同，索引会对应起来，缺失位用NAN填充</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>全称</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>eq</td>
+<td>equal to</td>
+<td>==</td>
+</tr>
+<tr>
+<td>ne</td>
+<td>not equal to</td>
+<td>!=</td>
+</tr>
+<tr>
+<td>lt</td>
+<td>less than</td>
+<td>&lt;</td>
+</tr>
+<tr>
+<td>gt</td>
+<td>greater than</td>
+<td>&gt;</td>
+</tr>
+<tr>
+<td>le</td>
+<td>less than or equal to</td>
+<td>&lt;=</td>
+</tr>
+<tr>
+<td>ge</td>
+<td>greater than or equal to</td>
+<td>&gt;=</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">417</span>]: a.eq(b)</span><br><span class="line">Out[<span class="number">417</span>]: </span><br><span class="line">       <span class="number">0</span>      <span class="number">1</span>      <span class="number">2</span>      <span class="number">3</span>      <span class="number">4</span></span><br><span class="line"><span class="number">0</span>   <span class="literal">True</span>   <span class="literal">True</span>   <span class="literal">True</span>   <span class="literal">True</span>  <span class="literal">False</span></span><br><span class="line"><span class="number">1</span>  <span class="literal">False</span>  <span class="literal">False</span>  <span class="literal">False</span>  <span class="literal">False</span>  <span class="literal">False</span></span><br><span class="line"><span class="number">2</span>  <span class="literal">False</span>  <span class="literal">False</span>  <span class="literal">False</span>  <span class="literal">False</span>  <span class="literal">False</span></span><br><span class="line"><span class="number">3</span>  <span class="literal">False</span>  <span class="literal">False</span>  <span class="literal">False</span>  <span class="literal">False</span>  <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-不同维度的运算"><a href="#4-3-不同维度的运算" class="headerlink" title="4.3 不同维度的运算"></a>4.3 不同维度的运算</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以广播的方式进行</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 0维</span></span><br><span class="line">In [<span class="number">421</span>]: a</span><br><span class="line">Out[<span class="number">421</span>]: <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1维</span></span><br><span class="line">In [<span class="number">422</span>]: b</span><br><span class="line">Out[<span class="number">422</span>]: </span><br><span class="line">a    <span class="number">5</span></span><br><span class="line">b    <span class="number">5</span></span><br><span class="line">c    <span class="number">5</span></span><br><span class="line">d    <span class="number">5</span></span><br><span class="line">dtype: int64</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2维</span></span><br><span class="line">In [<span class="number">423</span>]: c</span><br><span class="line">Out[<span class="number">423</span>]: </span><br><span class="line">   a  b   c   d</span><br><span class="line"><span class="number">0</span>  <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line"><span class="number">1</span>  <span class="number">4</span>  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line"><span class="number">2</span>  <span class="number">8</span>  <span class="number">9</span>  <span class="number">10</span>  <span class="number">11</span></span><br></pre></td></tr></table></figure>
+
+<p>注：</p>
+<ul>
+<li>方法运算时，必须 ”高维.方法(低维)“</li>
+<li>直接运算，高低维位置随意</li>
+</ul>
+<h5 id="一维VS多维"><a href="#一维VS多维" class="headerlink" title="一维VS多维"></a>一维VS多维</h5><p>一维与二维：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">431</span>]: a + b</span><br><span class="line">Out[<span class="number">431</span>]: </span><br><span class="line">a    <span class="number">8</span></span><br><span class="line">b    <span class="number">8</span></span><br><span class="line">c    <span class="number">8</span></span><br><span class="line">d    <span class="number">8</span></span><br><span class="line">dtype: int64</span><br><span class="line">    </span><br><span class="line">In [<span class="number">432</span>]: a &gt; b</span><br><span class="line">Out[<span class="number">432</span>]: </span><br><span class="line">a    <span class="literal">False</span></span><br><span class="line">b    <span class="literal">False</span></span><br><span class="line">c    <span class="literal">False</span></span><br><span class="line">d    <span class="literal">False</span></span><br><span class="line">dtype: <span class="built_in">bool</span></span><br></pre></td></tr></table></figure>
+
+<p>一维与三维类似</p>
+<h5 id="二维VS三维"><a href="#二维VS三维" class="headerlink" title="二维VS三维"></a>二维VS三维</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># (c每一行与b比较)</span></span><br><span class="line">In [<span class="number">448</span>]: c &gt; b</span><br><span class="line">Out[<span class="number">448</span>]: </span><br><span class="line">       a      b      c      d</span><br><span class="line"><span class="number">0</span>  <span class="literal">False</span>  <span class="literal">False</span>  <span class="literal">False</span>  <span class="literal">False</span> </span><br><span class="line"><span class="number">1</span>  <span class="literal">False</span>  <span class="literal">False</span>   <span class="literal">True</span>   <span class="literal">True</span></span><br><span class="line"><span class="number">2</span>   <span class="literal">True</span>   <span class="literal">True</span>   <span class="literal">True</span>   <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">450</span>]: c.gt(b)</span><br><span class="line">Out[<span class="number">450</span>]: </span><br><span class="line">       a      b      c      d</span><br><span class="line"><span class="number">0</span>  <span class="literal">False</span>  <span class="literal">False</span>  <span class="literal">False</span>  <span class="literal">False</span></span><br><span class="line"><span class="number">1</span>  <span class="literal">False</span>  <span class="literal">False</span>   <span class="literal">True</span>   <span class="literal">True</span></span><br><span class="line"><span class="number">2</span>   <span class="literal">True</span>   <span class="literal">True</span>   <span class="literal">True</span>   <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="5-排序"><a href="#5-排序" class="headerlink" title="5. 排序"></a>5. 排序</h1><h3 id="5-1-按轴排序"><a href="#5-1-按轴排序" class="headerlink" title="5.1 按轴排序"></a>5.1 按轴排序</h3><p><code>.sort_index(axis=0,ascending=True)</code>方法在指定轴上根据索引进行排序，默认升序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">452</span>]: a</span><br><span class="line">Out[<span class="number">452</span>]: </span><br><span class="line">    <span class="number">0</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line">c   <span class="number">0</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line">a   <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span>   <span class="number">8</span>   <span class="number">9</span></span><br><span class="line">d  <span class="number">10</span>  <span class="number">11</span>  <span class="number">12</span>  <span class="number">13</span>  <span class="number">14</span></span><br><span class="line">b  <span class="number">15</span>  <span class="number">16</span>  <span class="number">17</span>  <span class="number">18</span>  <span class="number">19</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 0轴升序（默认）</span></span><br><span class="line">In [<span class="number">455</span>]: b = a.sort_index()</span><br><span class="line"></span><br><span class="line">In [<span class="number">456</span>]: b</span><br><span class="line">Out[<span class="number">456</span>]: </span><br><span class="line">    <span class="number">0</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line">a   <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span>   <span class="number">8</span>   <span class="number">9</span></span><br><span class="line">b  <span class="number">15</span>  <span class="number">16</span>  <span class="number">17</span>  <span class="number">18</span>  <span class="number">19</span></span><br><span class="line">c   <span class="number">0</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line">d  <span class="number">10</span>  <span class="number">11</span>  <span class="number">12</span>  <span class="number">13</span>  <span class="number">14</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1轴降序</span></span><br><span class="line">In [<span class="number">457</span>]: b = b.sort_index(axis=<span class="number">1</span>, ascending=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">458</span>]: b</span><br><span class="line">Out[<span class="number">458</span>]: </span><br><span class="line">    <span class="number">4</span>   <span class="number">3</span>   <span class="number">2</span>   <span class="number">1</span>   <span class="number">0</span></span><br><span class="line">a   <span class="number">9</span>   <span class="number">8</span>   <span class="number">7</span>   <span class="number">6</span>   <span class="number">5</span></span><br><span class="line">b  <span class="number">19</span>  <span class="number">18</span>  <span class="number">17</span>  <span class="number">16</span>  <span class="number">15</span></span><br><span class="line">c   <span class="number">4</span>   <span class="number">3</span>   <span class="number">2</span>   <span class="number">1</span>   <span class="number">0</span></span><br><span class="line">d  <span class="number">14</span>  <span class="number">13</span>  <span class="number">12</span>  <span class="number">11</span>  <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-按值排序"><a href="#5-2-按值排序" class="headerlink" title="5.2 按值排序"></a>5.2 按值排序</h3><p><code>.sort_values()</code>方法在指定轴上根据数值进行排序，默认升序</p>
+<ul>
+<li>Series.sort_values(axis=0, ascending=True)</li>
+<li>DataFrame.sort_values(by, axis=0, ascending=True)</li>
+</ul>
+<p>​        by：axis上第by行\列</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">460</span>]: b</span><br><span class="line">Out[<span class="number">460</span>]: </span><br><span class="line">    <span class="number">4</span>   <span class="number">3</span>   <span class="number">2</span>   <span class="number">1</span>   <span class="number">0</span></span><br><span class="line">a   <span class="number">9</span>   <span class="number">8</span>   <span class="number">7</span>   <span class="number">6</span>   <span class="number">5</span></span><br><span class="line">b  <span class="number">19</span>  <span class="number">18</span>  <span class="number">17</span>  <span class="number">16</span>  <span class="number">15</span></span><br><span class="line">c   <span class="number">4</span>   <span class="number">3</span>   <span class="number">2</span>   <span class="number">1</span>   <span class="number">0</span></span><br><span class="line">d  <span class="number">14</span>  <span class="number">13</span>  <span class="number">12</span>  <span class="number">11</span>  <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 0轴方向（默认）、索引为2的列、降序</span></span><br><span class="line">In [<span class="number">461</span>]: b.sort_values(<span class="number">2</span>, ascending=<span class="literal">False</span>)</span><br><span class="line">Out[<span class="number">461</span>]: </span><br><span class="line">    <span class="number">4</span>   <span class="number">3</span>   <span class="number">2</span>   <span class="number">1</span>   <span class="number">0</span></span><br><span class="line">b  <span class="number">19</span>  <span class="number">18</span>  <span class="number">17</span>  <span class="number">16</span>  <span class="number">15</span></span><br><span class="line">d  <span class="number">14</span>  <span class="number">13</span>  <span class="number">12</span>  <span class="number">11</span>  <span class="number">10</span></span><br><span class="line">a   <span class="number">9</span>   <span class="number">8</span>   <span class="number">7</span>   <span class="number">6</span>   <span class="number">5</span></span><br><span class="line">c   <span class="number">4</span>   <span class="number">3</span>   <span class="number">2</span>   <span class="number">1</span>   <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1轴方向、索引为a的行、升序（默认）</span></span><br><span class="line">In [<span class="number">465</span>]: b.sort_values(<span class="string">&#x27;a&#x27;</span>, axis=<span class="number">1</span>)</span><br><span class="line">Out[<span class="number">465</span>]: </span><br><span class="line">    <span class="number">0</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line">a   <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span>   <span class="number">8</span>   <span class="number">9</span></span><br><span class="line">b  <span class="number">15</span>  <span class="number">16</span>  <span class="number">17</span>  <span class="number">18</span>  <span class="number">19</span></span><br><span class="line">c   <span class="number">0</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line">d  <span class="number">10</span>  <span class="number">11</span>  <span class="number">12</span>  <span class="number">13</span>  <span class="number">14</span></span><br></pre></td></tr></table></figure>
+
+<p>若其中有NaN，排序时统一放到末尾。</p>
+<h1 id="6-统计分析"><a href="#6-统计分析" class="headerlink" title="6. 统计分析"></a>6. 统计分析</h1><h3 id="6-1-基本统计分析"><a href="#6-1-基本统计分析" class="headerlink" title="6.1 基本统计分析"></a>6.1 基本统计分析</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.sum()</td>
+<td>axis=0（默认）</td>
+<td>计算数据的总和</td>
+</tr>
+<tr>
+<td>.count()</td>
+<td>axis=0</td>
+<td>非NaN值的数量</td>
+</tr>
+<tr>
+<td>.mean( )</td>
+<td>axis=0</td>
+<td>算术平均值</td>
+</tr>
+<tr>
+<td>.median()</td>
+<td>axis=0</td>
+<td>算术中位数</td>
+</tr>
+<tr>
+<td>.var()</td>
+<td>axis=0</td>
+<td>方差</td>
+</tr>
+<tr>
+<td>.std()</td>
+<td>axis=0</td>
+<td>标准差</td>
+</tr>
+<tr>
+<td>.min()</td>
+<td>axis=0</td>
+<td>最小值</td>
+</tr>
+<tr>
+<td>.max()</td>
+<td>axis=0</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td>.argmin()</td>
+<td>无</td>
+<td>最大值所在位置的索引</td>
+</tr>
+<tr>
+<td>.argmax()</td>
+<td>无</td>
+<td>最小值所在位置的索引</td>
+</tr>
+<tr>
+<td>.idxmin()</td>
+<td>axis=0</td>
+<td>最大值所在位置的索引</td>
+</tr>
+<tr>
+<td>.idxmax()</td>
+<td>axis=0</td>
+<td>最小值所在位置的索引</td>
+</tr>
+<tr>
+<td>.describe()</td>
+<td>无</td>
+<td>针对0轴（各列）的统计汇总</td>
+</tr>
+</tbody></table>
+<p>注：</p>
+<ul>
+<li>argmin和argmax仅用于Series，其余Series和DataFrame都行</li>
+<li>argmin和argmax用于Series是输出自动索引</li>
+<li>idxmin和idxmax用于Series是输出自动索引</li>
+<li>describe结果是DataFrame，可用DataFrame的性质和方法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">507</span>]: c</span><br><span class="line">Out[<span class="number">507</span>]: </span><br><span class="line">   a  b   c   d</span><br><span class="line"><span class="number">0</span>  <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line"><span class="number">1</span>  <span class="number">4</span>  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line"><span class="number">2</span>  <span class="number">8</span>  <span class="number">9</span>  <span class="number">10</span>  <span class="number">11</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">508</span>]: c.<span class="built_in">sum</span>()</span><br><span class="line">Out[<span class="number">508</span>]: </span><br><span class="line">a    <span class="number">12</span></span><br><span class="line">b    <span class="number">15</span></span><br><span class="line">c    <span class="number">18</span></span><br><span class="line">d    <span class="number">21</span></span><br><span class="line">dtype: int64</span><br><span class="line"></span><br><span class="line">In [<span class="number">509</span>]: c.<span class="built_in">sum</span>(axis=<span class="number">1</span>)</span><br><span class="line">Out[<span class="number">509</span>]: </span><br><span class="line"><span class="number">0</span>     <span class="number">6</span></span><br><span class="line"><span class="number">1</span>    <span class="number">22</span></span><br><span class="line"><span class="number">2</span>    <span class="number">38</span></span><br><span class="line">dtype: int64</span><br><span class="line"></span><br><span class="line">In [<span class="number">527</span>]: c.describe()</span><br><span class="line">Out[<span class="number">527</span>]: </span><br><span class="line">         a    b     c     d</span><br><span class="line">count  <span class="number">3.0</span>  <span class="number">3.0</span>   <span class="number">3.0</span>   <span class="number">3.0</span></span><br><span class="line">mean   <span class="number">4.0</span>  <span class="number">5.0</span>   <span class="number">6.0</span>   <span class="number">7.0</span></span><br><span class="line">std    <span class="number">4.0</span>  <span class="number">4.0</span>   <span class="number">4.0</span>   <span class="number">4.0</span></span><br><span class="line"><span class="built_in">min</span>    <span class="number">0.0</span>  <span class="number">1.0</span>   <span class="number">2.0</span>   <span class="number">3.0</span></span><br><span class="line"><span class="number">25</span>%    <span class="number">2.0</span>  <span class="number">3.0</span>   <span class="number">4.0</span>   <span class="number">5.0</span></span><br><span class="line"><span class="number">50</span>%    <span class="number">4.0</span>  <span class="number">5.0</span>   <span class="number">6.0</span>   <span class="number">7.0</span></span><br><span class="line"><span class="number">75</span>%    <span class="number">6.0</span>  <span class="number">7.0</span>   <span class="number">8.0</span>   <span class="number">9.0</span></span><br><span class="line"><span class="built_in">max</span>    <span class="number">8.0</span>  <span class="number">9.0</span>  <span class="number">10.0</span>  <span class="number">11.0</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">528</span>]: c.describe().loc[[<span class="string">&#x27;min&#x27;</span>]]</span><br><span class="line">Out[<span class="number">528</span>]: </span><br><span class="line">       a    b    c    d</span><br><span class="line"><span class="built_in">min</span>  <span class="number">0.0</span>  <span class="number">1.0</span>  <span class="number">2.0</span>  <span class="number">3.0</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">529</span>]: c.describe()[[<span class="string">&#x27;c&#x27;</span>]]</span><br><span class="line">Out[<span class="number">529</span>]: </span><br><span class="line">          c</span><br><span class="line">count   <span class="number">3.0</span></span><br><span class="line">mean    <span class="number">6.0</span></span><br><span class="line">std     <span class="number">4.0</span></span><br><span class="line"><span class="built_in">min</span>     <span class="number">2.0</span></span><br><span class="line"><span class="number">25</span>%     <span class="number">4.0</span></span><br><span class="line"><span class="number">50</span>%     <span class="number">6.0</span></span><br><span class="line"><span class="number">75</span>%     <span class="number">8.0</span></span><br><span class="line"><span class="built_in">max</span>    <span class="number">10.0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-1-累计统计分析"><a href="#6-1-累计统计分析" class="headerlink" title="6.1 累计统计分析"></a>6.1 累计统计分析</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.cumsum()</td>
+<td>依次给出前1、2、…、n个数的和</td>
+</tr>
+<tr>
+<td>.cumprod()</td>
+<td>依次给出前1、2、…、n个数的积</td>
+</tr>
+<tr>
+<td>.cummax()</td>
+<td>依次给出前1、2、…、n个数的最大值</td>
+</tr>
+<tr>
+<td>.cummin()</td>
+<td>依次给出前1、2、…、n个数的最小值</td>
+</tr>
+</tbody></table>
+<p>注：默认0轴方向，可加参数 axis=1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">536</span>]: c</span><br><span class="line">Out[<span class="number">536</span>]: </span><br><span class="line">   a  b   c   d</span><br><span class="line"><span class="number">0</span>  <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line"><span class="number">1</span>  <span class="number">4</span>  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line"><span class="number">2</span>  <span class="number">8</span>  <span class="number">9</span>  <span class="number">10</span>  <span class="number">11</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">537</span>]: c.cumprod()</span><br><span class="line">Out[<span class="number">537</span>]: </span><br><span class="line">   a   b    c    d</span><br><span class="line"><span class="number">0</span>  <span class="number">0</span>   <span class="number">1</span>    <span class="number">2</span>    <span class="number">3</span></span><br><span class="line"><span class="number">1</span>  <span class="number">0</span>   <span class="number">5</span>   <span class="number">12</span>   <span class="number">21</span></span><br><span class="line"><span class="number">2</span>  <span class="number">0</span>  <span class="number">45</span>  <span class="number">120</span>  <span class="number">231</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">538</span>]: c.cumprod(axis=<span class="number">1</span>)</span><br><span class="line">Out[<span class="number">538</span>]: </span><br><span class="line">   a   b    c     d</span><br><span class="line"><span class="number">0</span>  <span class="number">0</span>   <span class="number">0</span>    <span class="number">0</span>     <span class="number">0</span></span><br><span class="line"><span class="number">1</span>  <span class="number">4</span>  <span class="number">20</span>  <span class="number">120</span>   <span class="number">840</span></span><br><span class="line"><span class="number">2</span>  <span class="number">8</span>  <span class="number">72</span>  <span class="number">720</span>  <span class="number">7920</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.rolling(w).sum( )</td>
+<td>依次计算相邻w个元素的和</td>
+</tr>
+<tr>
+<td>.rolling(w).mean()</td>
+<td>依次计算相邻w个元素的算术平均值</td>
+</tr>
+<tr>
+<td>.rolling(w).var()</td>
+<td>依次计算相邻w个元素的方差</td>
+</tr>
+<tr>
+<td>.rolling(w).std()</td>
+<td>依次计算相邻w个元素的标准差</td>
+</tr>
+<tr>
+<td>.rolling(w).min( )</td>
+<td>依次计算相邻w个元素的最小值</td>
+</tr>
+<tr>
+<td>.rolling(w).max()</td>
+<td>依次计算相邻w个元素的最大值</td>
+</tr>
+</tbody></table>
+<p>注：</p>
+<ul>
+<li>默认0轴方向，rolling中可加参数 axis=1</li>
+<li>w个元素包括当前元素和前面w-1个，不足则为NaN</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">539</span>]: c</span><br><span class="line">Out[<span class="number">539</span>]: </span><br><span class="line">   a  b   c   d</span><br><span class="line"><span class="number">0</span>  <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line"><span class="number">1</span>  <span class="number">4</span>  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line"><span class="number">2</span>  <span class="number">8</span>  <span class="number">9</span>  <span class="number">10</span>  <span class="number">11</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">541</span>]: c.rolling(<span class="number">3</span>).<span class="built_in">sum</span>()</span><br><span class="line">Out[<span class="number">541</span>]: </span><br><span class="line">      a     b     c     d</span><br><span class="line"><span class="number">0</span>   NaN   NaN   NaN   NaN</span><br><span class="line"><span class="number">1</span>   NaN   NaN   NaN   NaN</span><br><span class="line"><span class="number">2</span>  <span class="number">12.0</span>  <span class="number">15.0</span>  <span class="number">18.0</span>  <span class="number">21.0</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">542</span>]: c.rolling(<span class="number">3</span>,axis=<span class="number">1</span>).<span class="built_in">sum</span>()</span><br><span class="line">Out[<span class="number">542</span>]: </span><br><span class="line">    a   b     c     d</span><br><span class="line"><span class="number">0</span> NaN NaN   <span class="number">3.0</span>   <span class="number">6.0</span></span><br><span class="line"><span class="number">1</span> NaN NaN  <span class="number">15.0</span>  <span class="number">18.0</span></span><br><span class="line"><span class="number">2</span> NaN NaN  <span class="number">27.0</span>  <span class="number">30.0</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="7-相关性分析"><a href="#7-相关性分析" class="headerlink" title="7. 相关性分析"></a>7. 相关性分析</h1><h3 id="7-1-协方差"><a href="#7-1-协方差" class="headerlink" title="7.1 协方差"></a>7.1 协方差</h3><ul>
+<li>协方差&gt;0，X和Y正相关</li>
+<li>协方差&lt;0，X和Y负相关</li>
+<li>协方差=0，X和Y独立无关</li>
+</ul>
+<p><code>.cov()</code>用于计算协方差矩阵</p>
+<h3 id="7-2-Pearson相关系数"><a href="#7-2-Pearson相关系数" class="headerlink" title="7.2 Pearson相关系数"></a>7.2 Pearson相关系数</h3><p>r为Pearson相关系数，取值范围[-1,+1]</p>
+<p>|r|范围：</p>
+<ul>
+<li>0.8-1.0 极强相关</li>
+<li>0.6-0.8 强相关</li>
+<li>0.4-0.6 中等程度相关</li>
+<li>0.2-0.4 弱相关</li>
+<li>0.0-0.2 极弱相关或无相关</li>
+</ul>
+<p><code>.corr()</code>用于计算相关系数矩阵（Pearson、Spearman、Kendall等系数）</p>
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">556</span>]: a</span><br><span class="line">Out[<span class="number">556</span>]: </span><br><span class="line"><span class="number">2008</span>     <span class="number">3.04</span></span><br><span class="line"><span class="number">2009</span>    <span class="number">22.93</span></span><br><span class="line"><span class="number">2010</span>    <span class="number">12.75</span></span><br><span class="line"><span class="number">2011</span>    <span class="number">22.60</span></span><br><span class="line"><span class="number">2012</span>    <span class="number">12.33</span></span><br><span class="line">dtype: float64</span><br><span class="line"></span><br><span class="line">In [<span class="number">557</span>]: b</span><br><span class="line">Out[<span class="number">557</span>]: </span><br><span class="line"><span class="number">2008</span>     <span class="number">8.18</span></span><br><span class="line"><span class="number">2009</span>    <span class="number">18.38</span></span><br><span class="line"><span class="number">2010</span>     <span class="number">9.13</span></span><br><span class="line"><span class="number">2011</span>     <span class="number">7.82</span></span><br><span class="line"><span class="number">2012</span>     <span class="number">6.96</span></span><br><span class="line">dtype: float64</span><br><span class="line"></span><br><span class="line">In [<span class="number">558</span>]: a.cov(b)</span><br><span class="line">Out[<span class="number">558</span>]: <span class="number">20.46345</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">559</span>]: a.corr(b)</span><br><span class="line">Out[<span class="number">559</span>]: <span class="number">0.5249598283887876</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="8-文件读写"><a href="#8-文件读写" class="headerlink" title="8. 文件读写"></a>8. 文件读写</h1><p><a class="link"   target="_blank" rel="noopener" href="https://www.runoob.com/pandas/pandas-csv-file.html" >Pandas CSV 文件 | 菜鸟教程 (runoob.com)<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.runoob.com/pandas/pandas-json.html" >Pandas JSON | 菜鸟教程 (runoob.com)<i class="fas fa-external-link-alt"></i></a></p>
+<h1 id="9-数据清洗"><a href="#9-数据清洗" class="headerlink" title="9. 数据清洗"></a>9. 数据清洗</h1><p>空值、错值、重复值</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.runoob.com/pandas/pandas-cleaning.html" >Pandas 数据清洗 | 菜鸟教程 (runoob.com)<i class="fas fa-external-link-alt"></i></a></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：数据预处理—Pandas</li>
+        <li>本文作者：kai</li>
+        <li>创建时间：2022-06-25 12:01:50</li>
+        <li>
+            本文链接：https://kainote.top/2022/06/25/数据预处理—Pandas/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86/">#数据预处理</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/Pandas/">#Pandas</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/06/25/%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E2%80%94matplotlib/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">数据预处理—matplotlib</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'AHJz59pFkPxFVv6TjMiyOv09-gzGzoHsz',
+                    appKey: 'sYY8BdpA9NT7zyvnPMkFlheA',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '嘿嘿～ 嘿嘿～ 嘿嘿嘿～',
+                    lang: 'zh-CN'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'kai';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">kai</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+				|
+				
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+		<!-- 注释 
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+		-->
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-text"></span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E4%BB%8B%E7%BB%8D"><span class="nav-text">1. 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Series%E7%B1%BB%E5%9E%8B"><span class="nav-text">2. Series类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E7%B4%A2%E5%BC%95"><span class="nav-text">2.1 索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%88%9B%E5%BB%BA"><span class="nav-text">2.2 创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-text">2.3 基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%BE%97%E7%B4%A2%E5%BC%95%E6%88%96%E5%86%85%E5%AE%B9"><span class="nav-text">获得索引或内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%B4%A2%E5%BC%95%E5%8F%96%E5%80%BC"><span class="nav-text">通过索引取值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%B1%BB%E4%BC%BCndarray%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-text">类似ndarray的操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%B1%BB%E4%BC%BC%E5%AD%97%E5%85%B8%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-text">类似字典的操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%B9%E9%BD%90%E6%93%8D%E4%BD%9C"><span class="nav-text">对齐操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#name%E5%B1%9E%E6%80%A7"><span class="nav-text">name属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9"><span class="nav-text">修改</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-DataFrame"><span class="nav-text">3. DataFrame</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E7%AE%80%E6%B4%81"><span class="nav-text">3.1 简洁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%88%9B%E5%BB%BA"><span class="nav-text">3.2 创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.3 查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E8%A1%8C%E5%90%8D%E3%80%81%E5%88%97%E5%90%8D%E3%80%81%E6%95%B0%E6%8D%AE"><span class="nav-text">查询行名、列名、数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%9F%90%E5%88%97"><span class="nav-text">查询某列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%9F%90%E8%A1%8C"><span class="nav-text">查询某行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%9F%90%E7%82%B9"><span class="nav-text">查询某点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E7%B4%A2%E5%BC%95%E6%93%8D%E4%BD%9C"><span class="nav-text">3.4 索引操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Index%E7%B1%BB%E5%9E%8B%E6%93%8D%E4%BD%9C"><span class="nav-text">Index类型操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E7%B4%A2%E5%BC%95"><span class="nav-text">重新索引</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%9F%90%E8%A1%8C-%E5%88%97"><span class="nav-text">删除某行&#x2F;列</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E8%BF%90%E7%AE%97"><span class="nav-text">4. 运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97"><span class="nav-text">4.1 算数运算</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E8%BF%90%E7%AE%97"><span class="nav-text">直接运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E8%BF%90%E7%AE%97"><span class="nav-text">使用方法运算</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97"><span class="nav-text">4.2 比较运算</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E8%BF%90%E7%AE%97-1"><span class="nav-text">直接运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E8%BF%90%E7%AE%97-1"><span class="nav-text">使用方法运算</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E4%B8%8D%E5%90%8C%E7%BB%B4%E5%BA%A6%E7%9A%84%E8%BF%90%E7%AE%97"><span class="nav-text">4.3 不同维度的运算</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%80%E7%BB%B4VS%E5%A4%9A%E7%BB%B4"><span class="nav-text">一维VS多维</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4VS%E4%B8%89%E7%BB%B4"><span class="nav-text">二维VS三维</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E6%8E%92%E5%BA%8F"><span class="nav-text">5. 排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E6%8C%89%E8%BD%B4%E6%8E%92%E5%BA%8F"><span class="nav-text">5.1 按轴排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E6%8C%89%E5%80%BC%E6%8E%92%E5%BA%8F"><span class="nav-text">5.2 按值排序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90"><span class="nav-text">6. 统计分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E5%9F%BA%E6%9C%AC%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90"><span class="nav-text">6.1 基本统计分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E7%B4%AF%E8%AE%A1%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90"><span class="nav-text">6.1 累计统计分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90"><span class="nav-text">7. 相关性分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-%E5%8D%8F%E6%96%B9%E5%B7%AE"><span class="nav-text">7.1 协方差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-Pearson%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0"><span class="nav-text">7.2 Pearson相关系数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99"><span class="nav-text">8. 文件读写</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97"><span class="nav-text">9. 数据清洗</span></a>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type = "text/javascript" src="/js/click.js"></script>
+<script type = "text/javascript" src="/js/snow.js"></script>
+
+</body>
+</html>
